@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ApplicaitonGeneration.db_RealtorClients>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div id="content">
+        <div class="row" style="margin-top:20px;"></div>
+    </div>
+    <br />
+    <p class="pull-right">
+        @Html.ActionLink("Create New", "Index", "RealtorDocument")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                First
+            </th>
+            <th>
+                Last
+            </th>
+            <th>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.db_UserContacts.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.db_UserContacts.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.db_UserContacts.LastName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "RealtorDocument", new { id = item.Id }, null) |
+                    @Html.ActionLink("Delete", "Delete", "RealtorDocument", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+    <script src="@Url.Content("~/build/client.bundle.js")"></script>
+    @Html.ReactInitJavaScript()
+
+</div>

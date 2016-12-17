@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ba5e078692d24c16b5d322a2275a91b4" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.AspNetRole" Width="1.5" PointX="0.75" PointY="21.5" />
+        <EntityTypeShape EntityType="Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="8.375" />
+        <EntityTypeShape EntityType="Model.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="18.5" />
+        <EntityTypeShape EntityType="Model.AspNetUser" Width="1.5" PointX="3" PointY="19.5" />
+        <EntityTypeShape EntityType="Model.db_RealtorBanks" Width="1.5" PointX="12.75" PointY="31" />
+        <EntityTypeShape EntityType="Model.db_RealtorClients" Width="1.5" PointX="10.5" PointY="26.625" />
+        <EntityTypeShape EntityType="Model.db_RealtorEmployments" Width="1.5" PointX="7.5" PointY="22.375" />
+        <EntityTypeShape EntityType="Model.db_RealtorHomes" Width="1.5" PointX="7.5" PointY="18.625" />
+        <EntityTypeShape EntityType="Model.db_RealtorReferences" Width="1.5" PointX="12.75" PointY="27" />
+        <EntityTypeShape EntityType="Model.db_UserAccounts" Width="1.5" PointX="5.25" PointY="37.75" />
+        <EntityTypeShape EntityType="Model.db_UserAddresses" Width="1.5" PointX="5.25" PointY="24.75" />
+        <EntityTypeShape EntityType="Model.db_UserContacts" Width="1.5" PointX="5.25" PointY="33.875" />
+        <EntityTypeShape EntityType="Model.db_UserLandlords" Width="1.5" PointX="7.5" PointY="26.75" />
+        <EntityTypeShape EntityType="Model.db_UserLeases" Width="1.5" PointX="5.25" PointY="11.125" />
+        <EntityTypeShape EntityType="Model.db_UserOccupations" Width="1.5" PointX="5.25" PointY="15" />
+        <EntityTypeShape EntityType="Model.db_UserReferences" Width="1.5" PointX="7.5" PointY="30.75" />
+        <EntityTypeShape EntityType="Model.db_UserSalaries" Width="1.5" PointX="5.25" PointY="21.125" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="Model.FK_Accounts_UserId" />
+        <AssociationConnector Association="Model.FK_Addresses_UserId" />
+        <AssociationConnector Association="Model.FK_Clients_AspNetUsers" />
+        <AssociationConnector Association="Model.FK_Contacts_UserId" />
+        <AssociationConnector Association="Model.FK_References_UserId" />
+        <AssociationConnector Association="Model.FK_Salaries_UserId" />
+        <AssociationConnector Association="Model.FK_UserLandlords_UserId" />
+        <AssociationConnector Association="Model.FK_UserLeases_UserId" />
+        <AssociationConnector Association="Model.FK_UserOccupations_UserId" />
+        <AssociationConnector Association="Model.FK_Banks_Account" />
+        <AssociationConnector Association="Model.FK_Banks_Address" />
+        <AssociationConnector Association="Model.FK_Banks_ClientId" />
+        <AssociationConnector Association="Model.FK_Banks_ReferenceId" />
+        <AssociationConnector Association="Model.FK_Clients_Contacts" />
+        <AssociationConnector Association="Model.FK_Employments_ClientId" />
+        <AssociationConnector Association="Model.FK_RealtorHomes_ClientId" />
+        <AssociationConnector Association="Model.FK_RealtorReferences_ClientId" />
+        <AssociationConnector Association="Model.FK_UserLandlords_ClientId" />
+        <AssociationConnector Association="Model.FK_Employments_Addresses" />
+        <AssociationConnector Association="Model.FK_Employments_Occupations" />
+        <AssociationConnector Association="Model.FK_Employments_SalaryId" />
+        <AssociationConnector Association="Model.FK_EmploymentsSupervisor_ReferenceId" />
+        <AssociationConnector Association="Model.FK_RealtorHomes_AddressId" />
+        <AssociationConnector Association="Model.FK_RealtorHomes_LandlordId" />
+        <AssociationConnector Association="Model.FK_RealtorHomes_LeaseId" />
+        <AssociationConnector Association="Model.FK_RealtorReferences_ReferenceId" />
+        <AssociationConnector Association="Model.FK_UserLandlords_Addresses" />
+        <AssociationConnector Association="Model.FK_UserLandlords_AddressId" />
+        <AssociationConnector Association="Model.FK_References_ContactId" />
+        <AssociationConnector Association="Model.FK_UserLandlords_ContactId" />
+        <AssociationConnector Association="Model.AspNetUserRoles" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
