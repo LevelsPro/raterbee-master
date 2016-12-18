@@ -1,158 +1,50 @@
-﻿
-@{
-    var bgpic = "";
-    if (Request.IsAuthenticated)
-    {
-        if (ViewBag.ShowBackground != null && ViewBag.ShowBackground)
-        {
-            bgpic = "full";
-        }
-    }
-    else
-    {
-        bgpic = "full";
-    }
-}
-
-<!DOCTYPE html>
-<html class="@(bgpic)">
+﻿<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Broker Intelligence Agency</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
 
-    <link rel="icon" href="~/Content/business-affiliate-network.png">
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
-    @*<!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">*@
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top navbanner">
-        <div class="">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" style="padding-top:5px;margin-left:0px;padding-right:0px;margin-left:10px;" href="/">
-                    <img style="width: 40px;" src="~/Content/briefcase.png" alt="">
-                </a>
-                @Html.ActionLink("Application Generation", "Index", "Home", null, new { @class = "navbar-brand navlinks", @style = "padding-top:16px;margin-right:70px;" })
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Raterbee", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "navlinks" })</li>
-                    @if (Request.IsAuthenticated)
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (Request.IsAuthenticated && User.IsInRole("SuperAdmin"))
                     {
-                        <li>@Html.ActionLink("Clients", "Index", "Client", routeValues: null, htmlAttributes: new { @class = "navlinks" })</li>
-                        <li>@Html.ActionLink("Document", "Index", "RealtorDocument", routeValues: null, htmlAttributes: new { @class = "navlinks" })</li>
+                        <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin")</li>
+                        <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin")</li>
+                        <li>@Html.ActionLink("All Answers", "Index", "Answers")</li>
                     }
-                    else
+                    else if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Document Tool", "Index", "RealtorDocument", routeValues: null, htmlAttributes: new { @class = "navlinks" })</li>
-                    }
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        <li>@Html.ActionLink("RolesAdmin", "Index", "RolesAdmin", new { @class = "navlinks" })</li>
-                        <li>@Html.ActionLink("UsersAdmin", "Index", "UsersAdmin", new { @class = "navlinks" })</li>
+                        <li>@Html.ActionLink("Answers", "Index", "Answers")</li>
                     }
                 </ul>
-                <div style="margin-right:50px;">
-                    @Html.Partial("_LoginPartial")
-                </div>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
-        <div class="row" style="background-color:#1ad1ff; padding-top:1px;"></div>
-        @*<div class="row" style="background-color:#33d6ff; padding-top:1px;"></div>
-            <div class="row" style="background-color:#4ddbff; padding-top:1px;"></div>
-            <div class="row" style="background-color:#66e0ff; padding-top:2px;"></div>
-            <div class="row" style="background-color:#80e5ff; padding-top:4px;"></div>
-            <div class="row" style="background-color:#99ebff; padding-top:4px;"></div>*@
-
-        @*<div class="row" style="background-color:#99ebff; padding-top:4px;"></div>
-            <div class="row" style="background-color:#80e5ff; padding-top:4px;"></div>
-            <div class="row" style="background-color:#66e0ff; padding-top:3px;"></div>
-            <div class="row" style="background-color:#4ddbff; padding-top:3px;"></div>
-            <div class="row" style="background-color:#33d6ff; padding-top:2px;"></div>
-            <div class="row" style="background-color:#1ad1ff; padding-top:2px;"></div>*@
-
-        @*<div class="row" style="background-color:#00ccff; padding-top:3px;"></div>*@
-        @*<div class="row" style="background-color:#00b8e6; padding-top:3px;"></div>*@
-
-
-        @*<div class="row" style="background-color:#00b8e6; padding-top:3px;"></div>
-            <div class="row" style="background-color:#00ccff; padding-top:3px;"></div>
-            <div class="row" style="background-color:#1ad1ff; padding-top:3px;"></div>
-            <div class="row" style="background-color:#33d6ff; padding-top:3px;"></div>
-            <div class="row" style="background-color:#4ddbff; padding-top:3px;"></div>
-            <div class="row" style="background-color:#66e0ff; padding-top:3px;"></div>
-            <div class="row" style="background-color:#80e5ff; padding-top:3px;"></div>
-            <div class="row" style="background-color:#99ebff; padding-top:3px;"></div>*@
     </div>
-    <div class="body-content">
+    <div class="container body-content" style="padding-top:60px;">
         @RenderBody()
-        @*<hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>*@
-        <div class="row container" style="padding-top:700px;"></div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - RaterBee</p>
+        </footer>
     </div>
-    <footer style="background-color:white; opacity:.7;">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4>
-                        <strong>Application Generation</strong>
-                    </h4>
-                    <p>
-                        New York City, Born and Raised.
-                    </p>
-                    <ul class="list-unstyled">
-                        @*<li><i class="fa fa-phone fa-fw"></i>Call Me.</li>*@
-                        <li>
-                            <strong><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:mbcooper2@gmail.com">Email Me.</a></strong>
-                        </li>
-                    </ul>
-                    @*<br>
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter fa-fw fa-3x"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-dribbble fa-fw fa-3x"></i></a>
-                        </li>
-                    </ul>*@
-                    @*<hr class="small">*@
-                    <p class="text-muted">Copyright &copy; Application Generation 2016</p>
-                </div>
-            </div>
-            <div class="text-center">
-                Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from
-                <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
-                is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
-            </div>
-        </div>
-    </footer>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+
     @RenderSection("scripts", required: false)
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.0/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.0/react-dom.js"></script>
-
-    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>*@
-    @*<script src="https://unpkg.com/classnames/index.js"></script>*@
-
-    <script src="https://unpkg.com/react-input-autosize/dist/react-input-autosize.js"></script>
-    <script src="https://unpkg.com/react-select/dist/react-select.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/react-select/dist/react-select.css">
-
-
-    <script src="@Url.Content("~/build/client.bundle.js")"></script>
-    @Html.ReactInitJavaScript()
 </body>
-
 </html>

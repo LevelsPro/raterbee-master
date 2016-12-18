@@ -9,7 +9,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 
 namespace ApplicationGeneration.Controllers
 {
@@ -20,7 +19,7 @@ namespace ApplicationGeneration.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -47,20 +46,6 @@ namespace ApplicationGeneration.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
-        //
-        // GET: /Account/Login
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("account/getuserid")]
-        public ActionResult GetUserId()
-        {
-            return Json(new
-            {
-                UserId = User.Identity.GetUserId<int>()
-            }, JsonRequestBehavior.AllowGet);
-        }
-
 
         private ApplicationSignInManager _signInManager;
 
@@ -101,82 +86,6 @@ namespace ApplicationGeneration.Controllers
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
-        }
-
-        // POST: /Account/LoginModal
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult LoginModal(LoginViewModel model, string returnUrl)
-        {
-            if (!ModelState.IsValid)
-            {
-                return Json(new { UserId = 0, Result = "Invalid object" });
-            }
-
-            // This doen't count login failures towards lockout only two factor authentication
-            // To enable password failures to trigger lockout, change to shouldLockout: true
-            var result = SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result.Result)
-            {
-                case SignInStatus.Success:
-                    var user = UserManager.FindByEmail(model.Email);
-                    return Json(new { UserId = user.Id, Result = "Success" });
-                case SignInStatus.LockedOut:
-                    return Json(new { UserId = 0, Result = "Your account has been locked, Please contact us for assistance." });
-                case SignInStatus.RequiresVerification:
-                    return Json(new { UserId = 0, Result = "Login Requires Verification" });
-                case SignInStatus.Failure:
-                default:
-                    return Json(new { LoggedIn = 0, Result = "Invalid login attempt." });
-            }
-        }
-
-        // POST: /Account/LoginModal
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult RegisterModal(LoginViewModel model, string returnUrl)
-        {
-            if (!ModelState.IsValid)
-            {
-                return Json(new { UserId = 0, Result = "Invalid object" });
-            }
-
-            var errors = "";
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = UserManager.CreateAsync(user, model.Password);
-                if (result.Result.Succeeded)
-                {
-                    var code = UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    var signedIn = SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-                    switch (signedIn.Result)
-                    {
-                        case SignInStatus.Success:
-                            user = UserManager.FindByEmail(model.Email);
-                            return Json(new { UserId = user.Id, Result = "Success!" });
-                        case SignInStatus.LockedOut:
-                            return Json(new { UserId = 0, Result = "Your account has been locked, Please contact us for assistance." });
-                        case SignInStatus.RequiresVerification:
-                            return Json(new { UserId = 0, Result = "Login Requires Verification" });
-                        case SignInStatus.Failure:
-                        default:
-                            return Json(new { LoggedIn = 0, Result = "Invalid login attempt." });
-                    }
-                }
-
-                foreach (var error in result.Result.Errors)
-                {
-                    errors += error + "; ";
-                }
-            }
-
-            return Json(new { UserId = 0, Result = errors });
-            // If we got this far, something failed, redisplay form
-            //return View(model);
         }
 
         //

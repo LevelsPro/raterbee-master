@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -47,44 +46,6 @@ namespace ApplicationGeneration.DAL.Implementations
         public void AddRange(IEnumerable<TEntity> entities)
         {
             _entities.AddRange(entities);
-        }
-
-        public void Attach(TEntity entity)
-        {
-            Context.Entry(entity).State = EntityState.Modified;
-
-            //ObjectStateEntry entry;
-            //// Track whether we need to perform an attach
-            //bool attach = false;
-            //if (
-            //    context.ObjectStateManager.TryGetObjectStateEntry
-            //        (
-            //            context.CreateEntityKey(entitySetName, entity),
-            //            out entry
-            //        )
-            //    )
-            //{
-            //    // Re-attach if necessary
-            //    attach = entry.State == EntityState.Detached;
-            //    // Get the discovered entity to the ref
-            //    entity = (T)entry.Entity;
-            //}
-            //else
-            //{
-            //    // Attach for the first time
-            //    attach = true;
-            //}
-            //if (attach)
-            //    context.AttachTo(entitySetName, entity);
-        }
-
-        public void RemoveById(int Id)
-        {
-            var entity = this.Get(Id);
-            if (entity != null)
-            {
-                _entities.Remove(entity);
-            }
         }
 
         public void Remove(TEntity entity)

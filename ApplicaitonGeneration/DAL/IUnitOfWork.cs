@@ -10,19 +10,10 @@ namespace ApplicationGeneration.DAL
     {
         IAspNetUserRepository Users { get; }
         IAspNetRoleRepository Roles { get; }
-        IRealtorClientRepository RealtorClients { get; }
-        IRealtorHomeRepository RealtorHomes { get; }
-        IRealtorEmploymentRepository RealtorEmployments { get; }
-        IRealtorBankRepository RealtorBanks { get; }
-        IRealtorReferenceRepository RealtorReferences { get; }
-        IUserAccountRepository UserAccounts { get; }
-        IUserAddressRepository UserAddresses { get; }
-        IUserContactRepository UserContacts { get; }
-        IUserLandlordRepository UserLandlords { get; }
-        IUserLeaseRepository UserLeases { get; }
-        IUserReferenceRepository UserReferences { get; }
-        IUserSalaryRepository UserSalaries { get; }
-        IUserOccupationRepository UserOccupations { get; }
+        ISurveyAnswerRepository SurveyAnswers { get; }
+        ISurveyQuestionRepository SurveyQuestions { get; }
+        ICompanyRepository Companies { get; }
+        IBeaconRepository Beacons { get; }
 
         int Complete();
     }

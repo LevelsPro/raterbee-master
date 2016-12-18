@@ -1,27 +1,6 @@
-﻿html{
-    width: 100%;
-    height: 100%;
-}
-
-body {
+﻿body {
     padding-top: 50px;
-    padding-bottom: 0px;
-    color: black !important;
-    /*font-family: 'Raleway',sans-serif;*/
-    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 15px;
-    font-weight: 200;
-    min-width: 100%;
-    min-height: 100%;
-	background: none;
-}
-
-.full {
-    background: url(/Content/bg.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;o
-    background-size: cover;
+    padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -62,136 +41,57 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
-.commentList {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+
+/******************/
+.rating {
+  float:left;
 }
 
-    .commentList li {
-        border-bottom: 1px solid #999;
-        padding: 0.5em 0;
-    }
-
-.modalStyle {
-    width: 900px;
+.rating:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+  clip:rect(0,0,0,0);
 }
 
-.modalHeaderStyle {
-    border-bottom: 0px;
-    padding-bottom: 0px;
+.rating:not(:checked) > label {
+  float:right;
+  width:1em;
+  padding:0 .1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:250%;
+  line-height:1.2;
+  color:#ddd;
+  text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
 }
 
-.modal-body {
-    padding: 0px;
+.rating:not(:checked) > label:before {
+    content: '★ ';
 }
 
-.navlinks {
-    color: #ffffff;
-    font-family: 'Raleway',sans-serif;
-    font-size: 14px;
-    font-weight: 900;
-    margin: 0;
-    height: 10px;
-    text-align: center;
-    color: #58595b !important;
+.rating > input:checked ~ label {
+  color: #ff7700;
+  text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);
 }
 
-    .navlinks:hover {
-        color: #33adff !important;
-    }
-
-.navbanner {
-    /*background-color: #5881DB;*/
-    background-color: white;
-    border-color: white;
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: gold;
+  text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
 }
 
-.btn:hover {
-  background-color: #33adff;
+.rating> input:checked + label:hover,
+.rating> input:checked + label:hover ~ label,
+.rating> input:checked ~ label:hover,
+.rating> input:checked ~ label:hover ~ label,
+.rating> label:hover ~ input:checked ~ label {
+  color: #ea0;
+  text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);
 }
 
-.collapsing {
-  position: relative;
-  height: 0;
-  overflow: hidden;
-  -webkit-transition: height .18s ease;
-       -o-transition: height .18s ease;
-          transition: height .18s ease;
-}
-
-
-/*****************************/
-/*footer for always on bottom*/
-/****************************/
-.footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  background-color: #efefef;
-  text-align: center;
-  padding-bottom:5px;
-  padding-top:5px;
-  font-size:11px;
-}
-html {
-  height: 100%;
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-/****************************/
-/****************************/
-/****************************/
-
-
-.text-vertical-center {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-}
-
-.headerh1 {
-    margin: 0;
-    padding: 0;
-    font-size: 4.5em;
-    font-weight: 700;
-}
-
-/* Custom Button Styles */
-
-.btn-dark {
-    border-radius: 0;
-    color: #fff;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.btn-dark:hover,
-.btn-dark:focus,
-.btn-dark:active {
-    color: #fff;
-    background-color: rgba(0,0,0,0.7);
-}
-
-.btn-light {
-    border-radius: 0;
-    color: #333;
-    background-color: rgb(255,255,255);
-}
-
-.btn-light:hover,
-.btn-light:focus,
-.btn-light:active {
-    color: #333;
-    background-color: rgba(255,255,255,0.8);
-}
-
-.darkmagentaHover:hover{
-   color: darkmagenta !important;
+.rating > label:active {
+  position:relative;
+  top:2px;
+  left:2px;
 }

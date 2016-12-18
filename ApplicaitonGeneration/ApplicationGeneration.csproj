@@ -49,10 +49,6 @@
       <HintPath>..\packages\JavaScriptEngineSwitcher.V8.2.0.0\lib\net451\ClearScript.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="itextsharp, Version=5.5.10.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.10\lib\itextsharp.dll</HintPath>
       <Private>True</Private>
@@ -267,8 +263,8 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ClientController.cs" />
-    <Compile Include="Controllers\RealtorDocumentController.cs" />
+    <Compile Include="Controllers\AnswersController.cs" />
+    <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
@@ -277,91 +273,26 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Implementations\AspNetRoleRepository.cs" />
-    <Compile Include="DAL\Implementations\UserAccountRepository.cs" />
-    <Compile Include="DAL\Implementations\UserAddressRepository.cs" />
-    <Compile Include="DAL\Implementations\UserContactRepository.cs" />
-    <Compile Include="DAL\Implementations\UserLandlordRepository.cs" />
-    <Compile Include="DAL\Implementations\UserLeaseRepository.cs" />
-    <Compile Include="DAL\Implementations\UserOccupationRepository.cs" />
-    <Compile Include="DAL\Implementations\UserReferenceRepository.cs" />
-    <Compile Include="DAL\Implementations\UserSalaryRepository.cs" />
-    <Compile Include="DAL\Implementations\RealtorEmploymentRepository.cs" />
-    <Compile Include="DAL\Implementations\RealtorReferenceRepository.cs" />
-    <Compile Include="DAL\Implementations\RealtorHomeRepository.cs" />
-    <Compile Include="DAL\Implementations\RealtorBankRepository.cs" />
-    <Compile Include="DAL\Implementations\RealtorClientRepository.cs" />
+    <Compile Include="DAL\Implementations\BeaconRepository.cs" />
+    <Compile Include="DAL\Implementations\SurveyAnswerRepository.cs" />
+    <Compile Include="DAL\Implementations\CompanyRepository.cs" />
+    <Compile Include="DAL\Implementations\SurveyQuestionRepository.cs" />
     <Compile Include="DAL\Implementations\AspNetUserRepository.cs" />
     <Compile Include="DAL\Implementations\Repository.cs" />
     <Compile Include="DAL\Interafaces\IAspNetRoleRepository.cs" />
-    <Compile Include="DAL\Interafaces\IRealtorClientRepository.cs" />
+    <Compile Include="DAL\Interafaces\IBeaconRepository.cs" />
+    <Compile Include="DAL\Interafaces\ICompanyRepository.cs" />
+    <Compile Include="DAL\Interafaces\ISurveyQuestionRepository.cs" />
+    <Compile Include="DAL\Interafaces\ISurveyAnswerRepository.cs" />
     <Compile Include="DAL\Interafaces\IAspNetUserRepository.cs" />
-    <Compile Include="DAL\Interafaces\IUserOccupationRepository.cs" />
-    <Compile Include="DAL\Interafaces\IUserSalaryRepository.cs" />
-    <Compile Include="DAL\Interafaces\IUserReferenceRepository.cs" />
-    <Compile Include="DAL\Interafaces\IUserLeaseRepository.cs" />
-    <Compile Include="DAL\Interafaces\IUserLandlordRepository.cs" />
-    <Compile Include="DAL\Interafaces\IUserContactRepository.cs" />
-    <Compile Include="DAL\Interafaces\IUserAddressRepository.cs" />
-    <Compile Include="DAL\Interafaces\IUserAccountRepository.cs" />
     <Compile Include="DAL\Interafaces\IRepository.cs" />
-    <Compile Include="DAL\Interafaces\IRealtorBankRepository.cs" />
-    <Compile Include="DAL\Interafaces\IRealtorEmploymentRepository.cs" />
-    <Compile Include="DAL\Interafaces\IRealtorHomeRepository.cs" />
-    <Compile Include="DAL\Interafaces\IRealtorReferenceRepository.cs" />
     <Compile Include="DAL\IUnitOfWork.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
-    <Compile Include="db_RealtorBanks.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_RealtorClients.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_RealtorEmployments.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_RealtorHomes.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_RealtorReferences.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_UserAccounts.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_UserAddresses.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_UserContacts.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_UserLandlords.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_UserLeases.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_UserOccupations.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_UserReferences.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_UserSalaries.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\DataAccessHelpers.cs" />
-    <Compile Include="Helpers\Helpers\322West57LeaseApplication.cs" />
-    <Compile Include="Helpers\Helpers\322West57LeaseApplicationCount.cs" />
-    <Compile Include="Helpers\Helpers\AkamCondominiumLeaseApplication1.cs" />
-    <Compile Include="Helpers\Helpers\AkamCondominiumLeaseApplication2.cs" />
-    <Compile Include="Helpers\Helpers\AkamCondominiumLeaseApplication3.cs" />
-    <Compile Include="Helpers\Helpers\RebnyNotificeOfIntentionToSellOrLeaseCondominiumUnit.cs" />
-    <Compile Include="Helpers\Helpers\RebnyNonStabilizedLease.cs" />
-    <Compile Include="Helpers\Helpers\RebnySprinklerDisclosure.cs" />
-    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -377,49 +308,41 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserModels\UserLease.cs" />
-    <Compile Include="Models\UserModels\UserAccount.cs" />
-    <Compile Include="Models\UserModels\UserContact.cs" />
-    <Compile Include="Models\UserModels\UserAddress.cs" />
-    <Compile Include="Models\RealtorModels\RealtorClientBank.cs" />
-    <Compile Include="Models\UserModels\UserOccupation.cs" />
-    <Compile Include="Models\UserModels\Timespan.cs" />
-    <Compile Include="Models\UserModels\UserSalary.cs" />
-    <Compile Include="Models\UserModels\UserReference.cs" />
-    <Compile Include="Models\UserModels\UserLandlord.cs" />
-    <Compile Include="Models\RealtorModels\RealtorClientEmployment.cs" />
-    <Compile Include="Models\RealtorModels\RealtorClientHome.cs" />
-    <Compile Include="Models\RealtorModels\RealtorClient.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\SurveyViewModel.cs" />
+    <Compile Include="Models\SurveyModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\RealtorModels\RealtorClientReference.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rb_Companies.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="rb_SurveyAnswers.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="rb_SurveyBeacons.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="rb_SurveyQuestions.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Build\client.bundle.js" />
     <Content Include="Build\server.bundle.js" />
-    <Content Include="Content\bg.jpg" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\briefcase.png" />
-    <Content Include="Content\business-affiliate-network.png" />
-    <Content Include="Content\components\InputDetailText.jsx" />
-    <Content Include=".babelrc" />
     <Content Include="Content\components\index.js" />
     <Content Include="Content\client.js" />
-    <Content Include="Content\folder.png" />
-    <Content Include="Content\robot.png" />
-    <Content Include="Content\robot_detailed_final.jpg" />
     <Content Include="Content\server.js" />
+    <Content Include="Content\modells-logo.png" />
+    <Content Include="Content\windowwearlog.jpg" />
+    <Content Include="Content\wwbw %281%29.png" />
+    <Content Include="Content\wwbw %282%29.png" />
+    <Content Include="Content\wwbw-3.png" />
     <Content Include="favicon.ico" />
-    <Content Include="Content\font-awesome\css\font-awesome.css" />
-    <Content Include="Content\font-awesome\css\font-awesome.min.css" />
-    <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -435,19 +358,10 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\javascript\ai.0.22.19-build00125.js" />
-    <Content Include="Scripts\javascript\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\javascript\bootstrap.js" />
     <Content Include="Scripts\javascript\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -455,61 +369,22 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include=".babelrc" />
     <None Include=".bin\bower.cmd" />
     <None Include=".bin\git.cmd" />
     <None Include=".bin\node.cmd" />
     <Content Include="package.json" />
-    <Content Include="Helpers\PDFs\322West57LeaseApplication.pdf" />
-    <Content Include="Helpers\PDFs\AkamCondominiumLeaseApplication1.pdf" />
-    <Content Include="Helpers\PDFs\AkamCondominiumLeaseApplication2.pdf" />
-    <Content Include="Helpers\PDFs\AkamCondominiumLeaseApplication3.pdf" />
-    <Content Include="Helpers\PDFs\AkamFinancialStatement1.pdf" />
-    <Content Include="Helpers\PDFs\AkamFinancialStatement2.pdf" />
-    <Content Include="Helpers\PDFs\AkamFinancialStatement3.pdf" />
-    <Content Include="Helpers\PDFs\RebnyNonStabilizedLease.pdf" />
-    <Content Include="Helpers\PDFs\RebnyNoticeOfIntentionToSellOrLeaseCondominiumUnit.pdf" />
-    <Content Include="Helpers\PDFs\RebnySprinklerDisclosure.pdf" />
-    <Content Include="Helpers\Helpers\GenerateClassFromDocument.pl" />
-    <Content Include="Content\components\LoginSignupModal.jsx" />
-    <Content Include="Content\components\DocumentTab.jsx" />
-    <Content Include="Content\components\CollapsePanelLinks.jsx" />
-    <Content Include="Content\components\InputDetailList.jsx" />
-    <Content Include="Content\font-awesome\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\font-awesome\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\font-awesome\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\font-awesome\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\font-awesome\fonts\FontAwesome.otf" />
-    <Content Include="Content\font-awesome\less\animated.less" />
-    <Content Include="Content\font-awesome\less\bordered-pulled.less" />
-    <Content Include="Content\font-awesome\less\core.less" />
-    <Content Include="Content\font-awesome\less\fixed-width.less" />
-    <Content Include="Content\font-awesome\less\font-awesome.less" />
-    <Content Include="Content\font-awesome\less\icons.less" />
-    <Content Include="Content\font-awesome\less\larger.less" />
-    <Content Include="Content\font-awesome\less\list.less" />
-    <Content Include="Content\font-awesome\less\mixins.less" />
-    <Content Include="Content\font-awesome\less\path.less" />
-    <Content Include="Content\font-awesome\less\rotated-flipped.less" />
-    <Content Include="Content\font-awesome\less\stacked.less" />
-    <Content Include="Content\font-awesome\less\variables.less" />
-    <Content Include="Content\font-awesome\scss\font-awesome.scss" />
-    <Content Include="Content\font-awesome\scss\_animated.scss" />
-    <Content Include="Content\font-awesome\scss\_bordered-pulled.scss" />
-    <Content Include="Content\font-awesome\scss\_core.scss" />
-    <Content Include="Content\font-awesome\scss\_fixed-width.scss" />
-    <Content Include="Content\font-awesome\scss\_icons.scss" />
-    <Content Include="Content\font-awesome\scss\_larger.scss" />
-    <Content Include="Content\font-awesome\scss\_list.scss" />
-    <Content Include="Content\font-awesome\scss\_mixins.scss" />
-    <Content Include="Content\font-awesome\scss\_path.scss" />
-    <Content Include="Content\font-awesome\scss\_rotated-flipped.scss" />
-    <Content Include="Content\font-awesome\scss\_stacked.scss" />
-    <Content Include="Content\font-awesome\scss\_variables.scss" />
-    <Content Include="Content\components\InputSendEmail.jsx" />
-    <Content Include="Content\components\Document - Copy.jsx" />
-    <None Include="Properties\PublishProfiles\applicationgeneration.pubxml" />
+    <Content Include="Content\components\SurveyForm.jsx" />
+    <Content Include="Content\components\ModellsSurveyForm.jsx" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\components\SurveyStarRating.jsx" />
+    <None Include="Properties\PublishProfiles\RaterBee - FTP.pubxml" />
     <None Include="Scripts\javascript\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\javascript\jquery-1.10.2.js" />
     <Content Include="Scripts\javascript\jquery-1.10.2.min.js" />
@@ -521,11 +396,7 @@
     <Content Include="Scripts\javascript\modernizr-2.6.2.js" />
     <Content Include="Scripts\javascript\respond.js" />
     <Content Include="Scripts\javascript\respond.min.js" />
-    <Content Include="Scripts\javascript\_references.js" />
-    <None Include="Content\components\Document.jsx" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -557,7 +428,6 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
@@ -570,12 +440,14 @@
     <Content Include="Views\RolesAdmin\Delete.cshtml" />
     <Content Include="Views\RolesAdmin\Create.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\Survey\Modells.cshtml" />
+    <Content Include="Views\Answers\Index.cshtml" />
+    <Content Include="Views\Answers\Edit.cshtml" />
+    <Content Include="Views\Shared\Thanks.cshtml" />
     <Content Include="webpack.config.js" />
-    <Content Include="Views\RealtorDocument\_IndexNonAuthenticated.cshtml" />
-    <Content Include="Views\RealtorDocument\_IndexAuthenticated.cshtml" />
-    <Content Include="Views\RealtorDocument\index.cshtml" />
-    <Content Include="Views\RealtorDocument\Edit.cshtml" />
-    <Content Include="Views\Client\Index.cshtml" />
+    <Content Include="Views\Survey\WinterWear.cshtml" />
+    <Content Include="Views\Shared\EmailSent.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

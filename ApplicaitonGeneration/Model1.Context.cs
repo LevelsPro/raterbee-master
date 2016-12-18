@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ApplicaitonGeneration
+namespace ApplicationGeneration
 {
     using System;
     using System.Data.Entity;
@@ -30,18 +30,9 @@ namespace ApplicaitonGeneration
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<db_RealtorBanks> db_RealtorBanks { get; set; }
-        public virtual DbSet<db_RealtorClients> db_RealtorClients { get; set; }
-        public virtual DbSet<db_RealtorEmployments> db_RealtorEmployments { get; set; }
-        public virtual DbSet<db_RealtorHomes> db_RealtorHomes { get; set; }
-        public virtual DbSet<db_RealtorReferences> db_RealtorReferences { get; set; }
-        public virtual DbSet<db_UserAccounts> db_UserAccounts { get; set; }
-        public virtual DbSet<db_UserAddresses> db_UserAddresses { get; set; }
-        public virtual DbSet<db_UserContacts> db_UserContacts { get; set; }
-        public virtual DbSet<db_UserLandlords> db_UserLandlords { get; set; }
-        public virtual DbSet<db_UserLeases> db_UserLeases { get; set; }
-        public virtual DbSet<db_UserOccupations> db_UserOccupations { get; set; }
-        public virtual DbSet<db_UserReferences> db_UserReferences { get; set; }
-        public virtual DbSet<db_UserSalaries> db_UserSalaries { get; set; }
+        public virtual DbSet<rb_Companies> rb_Companies { get; set; }
+        public virtual DbSet<rb_SurveyAnswers> rb_SurveyAnswers { get; set; }
+        public virtual DbSet<rb_SurveyBeacons> rb_SurveyBeacons { get; set; }
+        public virtual DbSet<rb_SurveyQuestions> rb_SurveyQuestions { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="raterbeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -65,269 +65,40 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CompanyId" Type="int" />
         </EntityType>
-        <EntityType Name="db_RealtorBanks">
+        <EntityType Name="rb_Companies">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClientId" Type="int" Nullable="false" />
-          <Property Name="LabelName" Type="nvarchar" MaxLength="100" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" />
-          <Property Name="AddressId" Type="int" />
-          <Property Name="ReferenceId" Type="int" />
-          <Property Name="AccountId" Type="int" />
+          <Property Name="CompanyName" Type="nchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="db_RealtorClients">
+        <EntityType Name="rb_SurveyAnswers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="LabelName" Type="nvarchar" MaxLength="100" />
-          <Property Name="ClientUserId" Type="int" Nullable="false" />
-          <Property Name="ContactId" Type="int" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="BeaconId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
+          <Property Name="SurveyAnswer" Type="nchar" MaxLength="100" />
+          <Property Name="DateSubmitted" Type="datetime" />
         </EntityType>
-        <EntityType Name="db_RealtorEmployments">
+        <EntityType Name="rb_SurveyBeacons">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LabelName" Type="nvarchar" MaxLength="100" />
-          <Property Name="ClientId" Type="int" Nullable="false" />
-          <Property Name="AddressId" Type="int" />
-          <Property Name="OccupationId" Type="int" />
-          <Property Name="SalaryId" Type="int" />
-          <Property Name="ReferenceId" Type="int" />
+          <Property Name="CompanyId" Type="int" />
         </EntityType>
-        <EntityType Name="db_RealtorHomes">
+        <EntityType Name="rb_SurveyQuestions">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ClientId" Type="int" Nullable="false" />
-          <Property Name="LabelName" Type="nchar" MaxLength="100" />
-          <Property Name="AddressId" Type="int" />
-          <Property Name="LeaseId" Type="int" />
-          <Property Name="LandlordId" Type="int" />
+          <Property Name="Question" Type="nchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="db_RealtorReferences">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LabelName" Type="nchar" MaxLength="100" />
-          <Property Name="ClientId" Type="int" Nullable="false" />
-          <Property Name="ReferenceType" Type="int" Nullable="false" />
-          <Property Name="ReferenceId" Type="int" />
-        </EntityType>
-        <EntityType Name="db_UserAccounts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="LabelName" Type="nvarchar" MaxLength="100" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" />
-          <Property Name="Type" Type="nvarchar" MaxLength="100" />
-          <Property Name="Number" Type="nvarchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="db_UserAddresses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="LabelName" Type="nvarchar" MaxLength="100" />
-          <Property Name="Street" Type="nvarchar" MaxLength="100" />
-          <Property Name="City" Type="nvarchar" MaxLength="100" />
-          <Property Name="State" Type="nvarchar" MaxLength="50" />
-          <Property Name="Zip" Type="nvarchar" MaxLength="20" />
-          <Property Name="ApartmentNumber" Type="nvarchar" MaxLength="20" />
-          <Property Name="Floor" Type="nvarchar" MaxLength="20" />
-          <Property Name="Neighborhood" Type="nvarchar" MaxLength="50" />
-          <Property Name="AddressNumber" Type="nchar" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="db_UserContacts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="LabelName" Type="nvarchar" MaxLength="100" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" />
-          <Property Name="Phonenumber" Type="nvarchar" MaxLength="20" />
-        </EntityType>
-        <EntityType Name="db_UserLandlords">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="LabelName" Type="nvarchar" MaxLength="100" />
-          <Property Name="ContactId" Type="int" />
-          <Property Name="AddressId" Type="int" />
-        </EntityType>
-        <EntityType Name="db_UserLeases">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="LabelName" Type="nvarchar" MaxLength="100" />
-          <Property Name="MonthlyRent" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="SecurityDeposit" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="garagefee" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="UtilitiesIncludedInRent" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="StartDate" Type="date" />
-          <Property Name="EndDate" Type="date" />
-        </EntityType>
-        <EntityType Name="db_UserOccupations">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="LabelName" Type="nvarchar" MaxLength="100" />
-          <Property Name="Occupation" Type="nvarchar" MaxLength="100" />
-          <Property Name="CompanyName" Type="nvarchar" MaxLength="100" />
-          <Property Name="StartDate" Type="date" />
-          <Property Name="EndDate" Type="date" />
-        </EntityType>
-        <EntityType Name="db_UserReferences">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="LabelName" Type="nvarchar" MaxLength="100" />
-          <Property Name="Relationship" Type="nvarchar" MaxLength="100" />
-          <Property Name="Title" Type="nvarchar" MaxLength="100" />
-          <Property Name="ContactId" Type="int" />
-        </EntityType>
-        <EntityType Name="db_UserSalaries">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="LabelName" Type="nvarchar" MaxLength="100" />
-          <Property Name="AnnualSalary" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="Bonus" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="OtherIncomeSource" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="OtherIncomeAmount" Type="decimal" Precision="15" Scale="2" />
-          <Property Name="TotalAnnualIncome" Type="decimal" Precision="15" Scale="2" />
-        </EntityType>
-        <Association Name="FK_Accounts_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="db_UserAccounts" Type="Self.db_UserAccounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserAccounts">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Addresses_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="db_UserAddresses" Type="Self.db_UserAddresses" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserAddresses">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Banks_Account">
-          <End Role="db_UserAccounts" Type="Self.db_UserAccounts" Multiplicity="0..1" />
-          <End Role="db_RealtorBanks" Type="Self.db_RealtorBanks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserAccounts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorBanks">
-              <PropertyRef Name="AccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Banks_Address">
-          <End Role="db_UserAddresses" Type="Self.db_UserAddresses" Multiplicity="0..1" />
-          <End Role="db_RealtorBanks" Type="Self.db_RealtorBanks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserAddresses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorBanks">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Banks_ClientId">
-          <End Role="db_RealtorClients" Type="Self.db_RealtorClients" Multiplicity="1" />
-          <End Role="db_RealtorBanks" Type="Self.db_RealtorBanks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_RealtorClients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorBanks">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Banks_ReferenceId">
-          <End Role="db_UserReferences" Type="Self.db_UserReferences" Multiplicity="0..1" />
-          <End Role="db_RealtorBanks" Type="Self.db_RealtorBanks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserReferences">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorBanks">
-              <PropertyRef Name="ReferenceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Clients_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="db_RealtorClients" Type="Self.db_RealtorClients" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorClients">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Clients_Contacts">
-          <End Role="db_UserContacts" Type="Self.db_UserContacts" Multiplicity="0..1" />
-          <End Role="db_RealtorClients" Type="Self.db_RealtorClients" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserContacts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorClients">
-              <PropertyRef Name="ContactId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Contacts_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="db_UserContacts" Type="Self.db_UserContacts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserContacts">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -384,314 +155,65 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Employments_Addresses">
-          <End Role="db_UserAddresses" Type="Self.db_UserAddresses" Multiplicity="0..1" />
-          <End Role="db_RealtorEmployments" Type="Self.db_RealtorEmployments" Multiplicity="*" />
+        <Association Name="FK_SurveyAnswers_Beacons">
+          <End Role="rb_SurveyBeacons" Type="Self.rb_SurveyBeacons" Multiplicity="0..1" />
+          <End Role="rb_SurveyAnswers" Type="Self.rb_SurveyAnswers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="db_UserAddresses">
+            <Principal Role="rb_SurveyBeacons">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="db_RealtorEmployments">
-              <PropertyRef Name="AddressId" />
+            <Dependent Role="rb_SurveyAnswers">
+              <PropertyRef Name="BeaconId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Employments_ClientId">
-          <End Role="db_RealtorClients" Type="Self.db_RealtorClients" Multiplicity="1" />
-          <End Role="db_RealtorEmployments" Type="Self.db_RealtorEmployments" Multiplicity="*" />
+        <Association Name="FK_SurveyAnswers_Companies">
+          <End Role="rb_Companies" Type="Self.rb_Companies" Multiplicity="0..1" />
+          <End Role="rb_SurveyAnswers" Type="Self.rb_SurveyAnswers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="db_RealtorClients">
+            <Principal Role="rb_Companies">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="db_RealtorEmployments">
-              <PropertyRef Name="ClientId" />
+            <Dependent Role="rb_SurveyAnswers">
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Employments_Occupations">
-          <End Role="db_UserOccupations" Type="Self.db_UserOccupations" Multiplicity="0..1" />
-          <End Role="db_RealtorEmployments" Type="Self.db_RealtorEmployments" Multiplicity="*" />
+        <Association Name="FK_SurveyAnswers_SurveyQuestions">
+          <End Role="rb_SurveyQuestions" Type="Self.rb_SurveyQuestions" Multiplicity="1" />
+          <End Role="rb_SurveyAnswers" Type="Self.rb_SurveyAnswers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="db_UserOccupations">
+            <Principal Role="rb_SurveyQuestions">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="db_RealtorEmployments">
-              <PropertyRef Name="OccupationId" />
+            <Dependent Role="rb_SurveyAnswers">
+              <PropertyRef Name="QuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Employments_SalaryId">
-          <End Role="db_UserSalaries" Type="Self.db_UserSalaries" Multiplicity="0..1" />
-          <End Role="db_RealtorEmployments" Type="Self.db_RealtorEmployments" Multiplicity="*" />
+        <Association Name="FK_SurveyBeacons_Companies">
+          <End Role="rb_Companies" Type="Self.rb_Companies" Multiplicity="0..1" />
+          <End Role="rb_SurveyBeacons" Type="Self.rb_SurveyBeacons" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="db_UserSalaries">
+            <Principal Role="rb_Companies">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="db_RealtorEmployments">
-              <PropertyRef Name="SalaryId" />
+            <Dependent Role="rb_SurveyBeacons">
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EmploymentsSupervisor_ReferenceId">
-          <End Role="db_UserReferences" Type="Self.db_UserReferences" Multiplicity="0..1" />
-          <End Role="db_RealtorEmployments" Type="Self.db_RealtorEmployments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserReferences">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorEmployments">
-              <PropertyRef Name="ReferenceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RealtorHomes_AddressId">
-          <End Role="db_UserAddresses" Type="Self.db_UserAddresses" Multiplicity="0..1" />
-          <End Role="db_RealtorHomes" Type="Self.db_RealtorHomes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserAddresses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorHomes">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RealtorHomes_ClientId">
-          <End Role="db_RealtorClients" Type="Self.db_RealtorClients" Multiplicity="1" />
-          <End Role="db_RealtorHomes" Type="Self.db_RealtorHomes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_RealtorClients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorHomes">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RealtorHomes_LandlordId">
-          <End Role="db_UserLandlords" Type="Self.db_UserLandlords" Multiplicity="0..1" />
-          <End Role="db_RealtorHomes" Type="Self.db_RealtorHomes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserLandlords">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorHomes">
-              <PropertyRef Name="LandlordId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RealtorHomes_LeaseId">
-          <End Role="db_UserLeases" Type="Self.db_UserLeases" Multiplicity="0..1" />
-          <End Role="db_RealtorHomes" Type="Self.db_RealtorHomes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserLeases">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorHomes">
-              <PropertyRef Name="LeaseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RealtorReferences_ClientId">
-          <End Role="db_RealtorClients" Type="Self.db_RealtorClients" Multiplicity="1" />
-          <End Role="db_RealtorReferences" Type="Self.db_RealtorReferences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_RealtorClients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorReferences">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RealtorReferences_ReferenceId">
-          <End Role="db_UserReferences" Type="Self.db_UserReferences" Multiplicity="0..1" />
-          <End Role="db_RealtorReferences" Type="Self.db_RealtorReferences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserReferences">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorReferences">
-              <PropertyRef Name="ReferenceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_References_ContactId">
-          <End Role="db_UserContacts" Type="Self.db_UserContacts" Multiplicity="0..1" />
-          <End Role="db_UserReferences" Type="Self.db_UserReferences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserContacts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserReferences">
-              <PropertyRef Name="ContactId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_References_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="db_UserReferences" Type="Self.db_UserReferences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserReferences">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Salaries_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="db_UserSalaries" Type="Self.db_UserSalaries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserSalaries">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserLandlords_Addresses">
-          <End Role="db_UserAddresses" Type="Self.db_UserAddresses" Multiplicity="0..1" />
-          <End Role="db_UserLandlords" Type="Self.db_UserLandlords" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserAddresses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserLandlords">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserLandlords_AddressId">
-          <End Role="db_UserAddresses" Type="Self.db_UserAddresses" Multiplicity="0..1" />
-          <End Role="db_UserLandlords" Type="Self.db_UserLandlords" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserAddresses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserLandlords">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserLandlords_ClientId">
-          <End Role="db_RealtorClients" Type="Self.db_RealtorClients" Multiplicity="1" />
-          <End Role="db_UserLandlords" Type="Self.db_UserLandlords" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_RealtorClients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserLandlords">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserLandlords_ContactId">
-          <End Role="db_UserContacts" Type="Self.db_UserContacts" Multiplicity="0..1" />
-          <End Role="db_UserLandlords" Type="Self.db_UserLandlords" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserContacts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserLandlords">
-              <PropertyRef Name="ContactId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserLandlords_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="db_UserLandlords" Type="Self.db_UserLandlords" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserLandlords">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserLeases_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="db_UserLeases" Type="Self.db_UserLeases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserLeases">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserOccupations_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="db_UserOccupations" Type="Self.db_UserOccupations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserOccupations">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="ModelStoreContainer">
+        <EntityContainer Name="raterbeeModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_RealtorBanks" EntityType="Self.db_RealtorBanks" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_RealtorClients" EntityType="Self.db_RealtorClients" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_RealtorEmployments" EntityType="Self.db_RealtorEmployments" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_RealtorHomes" EntityType="Self.db_RealtorHomes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_RealtorReferences" EntityType="Self.db_RealtorReferences" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_UserAccounts" EntityType="Self.db_UserAccounts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_UserAddresses" EntityType="Self.db_UserAddresses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_UserContacts" EntityType="Self.db_UserContacts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_UserLandlords" EntityType="Self.db_UserLandlords" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_UserLeases" EntityType="Self.db_UserLeases" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_UserOccupations" EntityType="Self.db_UserOccupations" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_UserReferences" EntityType="Self.db_UserReferences" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="db_UserSalaries" EntityType="Self.db_UserSalaries" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Accounts_UserId" Association="Self.FK_Accounts_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="db_UserAccounts" EntitySet="db_UserAccounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Addresses_UserId" Association="Self.FK_Addresses_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="db_UserAddresses" EntitySet="db_UserAddresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Banks_Account" Association="Self.FK_Banks_Account">
-            <End Role="db_UserAccounts" EntitySet="db_UserAccounts" />
-            <End Role="db_RealtorBanks" EntitySet="db_RealtorBanks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Banks_Address" Association="Self.FK_Banks_Address">
-            <End Role="db_UserAddresses" EntitySet="db_UserAddresses" />
-            <End Role="db_RealtorBanks" EntitySet="db_RealtorBanks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Banks_ClientId" Association="Self.FK_Banks_ClientId">
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-            <End Role="db_RealtorBanks" EntitySet="db_RealtorBanks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Banks_ReferenceId" Association="Self.FK_Banks_ReferenceId">
-            <End Role="db_UserReferences" EntitySet="db_UserReferences" />
-            <End Role="db_RealtorBanks" EntitySet="db_RealtorBanks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clients_AspNetUsers" Association="Self.FK_Clients_AspNetUsers">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clients_Contacts" Association="Self.FK_Clients_Contacts">
-            <End Role="db_UserContacts" EntitySet="db_UserContacts" />
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contacts_UserId" Association="Self.FK_Contacts_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="db_UserContacts" EntitySet="db_UserContacts" />
-          </AssociationSet>
+          <EntitySet Name="rb_Companies" EntityType="Self.rb_Companies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rb_SurveyAnswers" EntityType="Self.rb_SurveyAnswers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rb_SurveyBeacons" EntityType="Self.rb_SurveyBeacons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rb_SurveyQuestions" EntityType="Self.rb_SurveyQuestions" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -708,264 +230,45 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Employments_Addresses" Association="Self.FK_Employments_Addresses">
-            <End Role="db_UserAddresses" EntitySet="db_UserAddresses" />
-            <End Role="db_RealtorEmployments" EntitySet="db_RealtorEmployments" />
+          <AssociationSet Name="FK_SurveyAnswers_Beacons" Association="Self.FK_SurveyAnswers_Beacons">
+            <End Role="rb_SurveyBeacons" EntitySet="rb_SurveyBeacons" />
+            <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Employments_ClientId" Association="Self.FK_Employments_ClientId">
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-            <End Role="db_RealtorEmployments" EntitySet="db_RealtorEmployments" />
+          <AssociationSet Name="FK_SurveyAnswers_Companies" Association="Self.FK_SurveyAnswers_Companies">
+            <End Role="rb_Companies" EntitySet="rb_Companies" />
+            <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Employments_Occupations" Association="Self.FK_Employments_Occupations">
-            <End Role="db_UserOccupations" EntitySet="db_UserOccupations" />
-            <End Role="db_RealtorEmployments" EntitySet="db_RealtorEmployments" />
+          <AssociationSet Name="FK_SurveyAnswers_SurveyQuestions" Association="Self.FK_SurveyAnswers_SurveyQuestions">
+            <End Role="rb_SurveyQuestions" EntitySet="rb_SurveyQuestions" />
+            <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Employments_SalaryId" Association="Self.FK_Employments_SalaryId">
-            <End Role="db_UserSalaries" EntitySet="db_UserSalaries" />
-            <End Role="db_RealtorEmployments" EntitySet="db_RealtorEmployments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmploymentsSupervisor_ReferenceId" Association="Self.FK_EmploymentsSupervisor_ReferenceId">
-            <End Role="db_UserReferences" EntitySet="db_UserReferences" />
-            <End Role="db_RealtorEmployments" EntitySet="db_RealtorEmployments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RealtorHomes_AddressId" Association="Self.FK_RealtorHomes_AddressId">
-            <End Role="db_UserAddresses" EntitySet="db_UserAddresses" />
-            <End Role="db_RealtorHomes" EntitySet="db_RealtorHomes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RealtorHomes_ClientId" Association="Self.FK_RealtorHomes_ClientId">
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-            <End Role="db_RealtorHomes" EntitySet="db_RealtorHomes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RealtorHomes_LandlordId" Association="Self.FK_RealtorHomes_LandlordId">
-            <End Role="db_UserLandlords" EntitySet="db_UserLandlords" />
-            <End Role="db_RealtorHomes" EntitySet="db_RealtorHomes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RealtorHomes_LeaseId" Association="Self.FK_RealtorHomes_LeaseId">
-            <End Role="db_UserLeases" EntitySet="db_UserLeases" />
-            <End Role="db_RealtorHomes" EntitySet="db_RealtorHomes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RealtorReferences_ClientId" Association="Self.FK_RealtorReferences_ClientId">
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-            <End Role="db_RealtorReferences" EntitySet="db_RealtorReferences" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RealtorReferences_ReferenceId" Association="Self.FK_RealtorReferences_ReferenceId">
-            <End Role="db_UserReferences" EntitySet="db_UserReferences" />
-            <End Role="db_RealtorReferences" EntitySet="db_RealtorReferences" />
-          </AssociationSet>
-          <AssociationSet Name="FK_References_ContactId" Association="Self.FK_References_ContactId">
-            <End Role="db_UserContacts" EntitySet="db_UserContacts" />
-            <End Role="db_UserReferences" EntitySet="db_UserReferences" />
-          </AssociationSet>
-          <AssociationSet Name="FK_References_UserId" Association="Self.FK_References_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="db_UserReferences" EntitySet="db_UserReferences" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Salaries_UserId" Association="Self.FK_Salaries_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="db_UserSalaries" EntitySet="db_UserSalaries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserLandlords_Addresses" Association="Self.FK_UserLandlords_Addresses">
-            <End Role="db_UserAddresses" EntitySet="db_UserAddresses" />
-            <End Role="db_UserLandlords" EntitySet="db_UserLandlords" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserLandlords_AddressId" Association="Self.FK_UserLandlords_AddressId">
-            <End Role="db_UserAddresses" EntitySet="db_UserAddresses" />
-            <End Role="db_UserLandlords" EntitySet="db_UserLandlords" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserLandlords_ClientId" Association="Self.FK_UserLandlords_ClientId">
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-            <End Role="db_UserLandlords" EntitySet="db_UserLandlords" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserLandlords_ContactId" Association="Self.FK_UserLandlords_ContactId">
-            <End Role="db_UserContacts" EntitySet="db_UserContacts" />
-            <End Role="db_UserLandlords" EntitySet="db_UserLandlords" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserLandlords_UserId" Association="Self.FK_UserLandlords_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="db_UserLandlords" EntitySet="db_UserLandlords" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserLeases_UserId" Association="Self.FK_UserLeases_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="db_UserLeases" EntitySet="db_UserLeases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserOccupations_UserId" Association="Self.FK_UserOccupations_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="db_UserOccupations" EntitySet="db_UserOccupations" />
+          <AssociationSet Name="FK_SurveyBeacons_Companies" Association="Self.FK_SurveyBeacons_Companies">
+            <End Role="rb_Companies" EntitySet="rb_Companies" />
+            <End Role="rb_SurveyBeacons" EntitySet="rb_SurveyBeacons" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="ApplicationEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Model.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="Model.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Model.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Model.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="Model.AspNetUser" />
-          <EntitySet Name="db_RealtorBanks" EntityType="Model.db_RealtorBanks" />
-          <EntitySet Name="db_RealtorClients" EntityType="Model.db_RealtorClients" />
-          <EntitySet Name="db_RealtorEmployments" EntityType="Model.db_RealtorEmployments" />
-          <EntitySet Name="db_RealtorHomes" EntityType="Model.db_RealtorHomes" />
-          <EntitySet Name="db_RealtorReferences" EntityType="Model.db_RealtorReferences" />
-          <EntitySet Name="db_UserAccounts" EntityType="Model.db_UserAccounts" />
-          <EntitySet Name="db_UserAddresses" EntityType="Model.db_UserAddresses" />
-          <EntitySet Name="db_UserContacts" EntityType="Model.db_UserContacts" />
-          <EntitySet Name="db_UserLandlords" EntityType="Model.db_UserLandlords" />
-          <EntitySet Name="db_UserLeases" EntityType="Model.db_UserLeases" />
-          <EntitySet Name="db_UserOccupations" EntityType="Model.db_UserOccupations" />
-          <EntitySet Name="db_UserReferences" EntityType="Model.db_UserReferences" />
-          <EntitySet Name="db_UserSalaries" EntityType="Model.db_UserSalaries" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Accounts_UserId" Association="Model.FK_Accounts_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="db_UserAccounts" EntitySet="db_UserAccounts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Addresses_UserId" Association="Model.FK_Addresses_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="db_UserAddresses" EntitySet="db_UserAddresses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clients_AspNetUsers" Association="Model.FK_Clients_AspNetUsers">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Contacts_UserId" Association="Model.FK_Contacts_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="db_UserContacts" EntitySet="db_UserContacts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_References_UserId" Association="Model.FK_References_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="db_UserReferences" EntitySet="db_UserReferences" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Salaries_UserId" Association="Model.FK_Salaries_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="db_UserSalaries" EntitySet="db_UserSalaries" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserLandlords_UserId" Association="Model.FK_UserLandlords_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="db_UserLandlords" EntitySet="db_UserLandlords" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserLeases_UserId" Association="Model.FK_UserLeases_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="db_UserLeases" EntitySet="db_UserLeases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserOccupations_UserId" Association="Model.FK_UserOccupations_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="db_UserOccupations" EntitySet="db_UserOccupations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Banks_Account" Association="Model.FK_Banks_Account">
-            <End Role="db_UserAccounts" EntitySet="db_UserAccounts" />
-            <End Role="db_RealtorBanks" EntitySet="db_RealtorBanks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Banks_Address" Association="Model.FK_Banks_Address">
-            <End Role="db_UserAddresses" EntitySet="db_UserAddresses" />
-            <End Role="db_RealtorBanks" EntitySet="db_RealtorBanks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Banks_ClientId" Association="Model.FK_Banks_ClientId">
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-            <End Role="db_RealtorBanks" EntitySet="db_RealtorBanks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Banks_ReferenceId" Association="Model.FK_Banks_ReferenceId">
-            <End Role="db_UserReferences" EntitySet="db_UserReferences" />
-            <End Role="db_RealtorBanks" EntitySet="db_RealtorBanks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clients_Contacts" Association="Model.FK_Clients_Contacts">
-            <End Role="db_UserContacts" EntitySet="db_UserContacts" />
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employments_ClientId" Association="Model.FK_Employments_ClientId">
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-            <End Role="db_RealtorEmployments" EntitySet="db_RealtorEmployments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RealtorHomes_ClientId" Association="Model.FK_RealtorHomes_ClientId">
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-            <End Role="db_RealtorHomes" EntitySet="db_RealtorHomes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RealtorReferences_ClientId" Association="Model.FK_RealtorReferences_ClientId">
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-            <End Role="db_RealtorReferences" EntitySet="db_RealtorReferences" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserLandlords_ClientId" Association="Model.FK_UserLandlords_ClientId">
-            <End Role="db_RealtorClients" EntitySet="db_RealtorClients" />
-            <End Role="db_UserLandlords" EntitySet="db_UserLandlords" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employments_Addresses" Association="Model.FK_Employments_Addresses">
-            <End Role="db_UserAddresses" EntitySet="db_UserAddresses" />
-            <End Role="db_RealtorEmployments" EntitySet="db_RealtorEmployments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employments_Occupations" Association="Model.FK_Employments_Occupations">
-            <End Role="db_UserOccupations" EntitySet="db_UserOccupations" />
-            <End Role="db_RealtorEmployments" EntitySet="db_RealtorEmployments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employments_SalaryId" Association="Model.FK_Employments_SalaryId">
-            <End Role="db_UserSalaries" EntitySet="db_UserSalaries" />
-            <End Role="db_RealtorEmployments" EntitySet="db_RealtorEmployments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EmploymentsSupervisor_ReferenceId" Association="Model.FK_EmploymentsSupervisor_ReferenceId">
-            <End Role="db_UserReferences" EntitySet="db_UserReferences" />
-            <End Role="db_RealtorEmployments" EntitySet="db_RealtorEmployments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RealtorHomes_AddressId" Association="Model.FK_RealtorHomes_AddressId">
-            <End Role="db_UserAddresses" EntitySet="db_UserAddresses" />
-            <End Role="db_RealtorHomes" EntitySet="db_RealtorHomes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RealtorHomes_LandlordId" Association="Model.FK_RealtorHomes_LandlordId">
-            <End Role="db_UserLandlords" EntitySet="db_UserLandlords" />
-            <End Role="db_RealtorHomes" EntitySet="db_RealtorHomes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RealtorHomes_LeaseId" Association="Model.FK_RealtorHomes_LeaseId">
-            <End Role="db_UserLeases" EntitySet="db_UserLeases" />
-            <End Role="db_RealtorHomes" EntitySet="db_RealtorHomes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_RealtorReferences_ReferenceId" Association="Model.FK_RealtorReferences_ReferenceId">
-            <End Role="db_UserReferences" EntitySet="db_UserReferences" />
-            <End Role="db_RealtorReferences" EntitySet="db_RealtorReferences" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserLandlords_Addresses" Association="Model.FK_UserLandlords_Addresses">
-            <End Role="db_UserAddresses" EntitySet="db_UserAddresses" />
-            <End Role="db_UserLandlords" EntitySet="db_UserLandlords" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserLandlords_AddressId" Association="Model.FK_UserLandlords_AddressId">
-            <End Role="db_UserAddresses" EntitySet="db_UserAddresses" />
-            <End Role="db_UserLandlords" EntitySet="db_UserLandlords" />
-          </AssociationSet>
-          <AssociationSet Name="FK_References_ContactId" Association="Model.FK_References_ContactId">
-            <End Role="db_UserContacts" EntitySet="db_UserContacts" />
-            <End Role="db_UserReferences" EntitySet="db_UserReferences" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserLandlords_ContactId" Association="Model.FK_UserLandlords_ContactId">
-            <End Role="db_UserContacts" EntitySet="db_UserContacts" />
-            <End Role="db_UserLandlords" EntitySet="db_UserLandlords" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Model.AspNetUserRoles">
-            <End Role="AspNetRole" EntitySet="AspNetRoles" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="raterbeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
             <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Model.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
@@ -975,7 +278,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
           <Key>
@@ -983,10 +286,10 @@
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
@@ -1003,851 +306,275 @@
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
-          <NavigationProperty Name="db_UserAccounts" Relationship="Model.FK_Accounts_UserId" FromRole="AspNetUser" ToRole="db_UserAccounts" />
-          <NavigationProperty Name="db_UserAddresses" Relationship="Model.FK_Addresses_UserId" FromRole="AspNetUser" ToRole="db_UserAddresses" />
-          <NavigationProperty Name="db_RealtorClients" Relationship="Model.FK_Clients_AspNetUsers" FromRole="AspNetUser" ToRole="db_RealtorClients" />
-          <NavigationProperty Name="db_UserContacts" Relationship="Model.FK_Contacts_UserId" FromRole="AspNetUser" ToRole="db_UserContacts" />
-          <NavigationProperty Name="db_UserReferences" Relationship="Model.FK_References_UserId" FromRole="AspNetUser" ToRole="db_UserReferences" />
-          <NavigationProperty Name="db_UserSalaries" Relationship="Model.FK_Salaries_UserId" FromRole="AspNetUser" ToRole="db_UserSalaries" />
-          <NavigationProperty Name="db_UserLandlords" Relationship="Model.FK_UserLandlords_UserId" FromRole="AspNetUser" ToRole="db_UserLandlords" />
-          <NavigationProperty Name="db_UserLeases" Relationship="Model.FK_UserLeases_UserId" FromRole="AspNetUser" ToRole="db_UserLeases" />
-          <NavigationProperty Name="db_UserOccupations" Relationship="Model.FK_UserOccupations_UserId" FromRole="AspNetUser" ToRole="db_UserOccupations" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Model.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
-        <EntityType Name="db_RealtorBanks">
+        <EntityType Name="rb_Companies">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AddressId" Type="Int32" />
-          <Property Name="ReferenceId" Type="Int32" />
-          <Property Name="AccountId" Type="Int32" />
-          <NavigationProperty Name="db_UserAccounts" Relationship="Model.FK_Banks_Account" FromRole="db_RealtorBanks" ToRole="db_UserAccounts" />
-          <NavigationProperty Name="db_UserAddresses" Relationship="Model.FK_Banks_Address" FromRole="db_RealtorBanks" ToRole="db_UserAddresses" />
-          <NavigationProperty Name="db_RealtorClients" Relationship="Model.FK_Banks_ClientId" FromRole="db_RealtorBanks" ToRole="db_RealtorClients" />
-          <NavigationProperty Name="db_UserReferences" Relationship="Model.FK_Banks_ReferenceId" FromRole="db_RealtorBanks" ToRole="db_UserReferences" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="rb_SurveyAnswers" Relationship="Self.FK_SurveyAnswers_Companies" FromRole="rb_Companies" ToRole="rb_SurveyAnswers" />
+          <NavigationProperty Name="rb_SurveyBeacons" Relationship="Self.FK_SurveyBeacons_Companies" FromRole="rb_Companies" ToRole="rb_SurveyBeacons" />
         </EntityType>
-        <EntityType Name="db_RealtorClients">
+        <EntityType Name="rb_SurveyAnswers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ClientUserId" Type="Int32" Nullable="false" />
-          <Property Name="ContactId" Type="Int32" />
-          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_Clients_AspNetUsers" FromRole="db_RealtorClients" ToRole="AspNetUser" />
-          <NavigationProperty Name="db_RealtorBanks" Relationship="Model.FK_Banks_ClientId" FromRole="db_RealtorClients" ToRole="db_RealtorBanks" />
-          <NavigationProperty Name="db_UserContacts" Relationship="Model.FK_Clients_Contacts" FromRole="db_RealtorClients" ToRole="db_UserContacts" />
-          <NavigationProperty Name="db_RealtorEmployments" Relationship="Model.FK_Employments_ClientId" FromRole="db_RealtorClients" ToRole="db_RealtorEmployments" />
-          <NavigationProperty Name="db_RealtorHomes" Relationship="Model.FK_RealtorHomes_ClientId" FromRole="db_RealtorClients" ToRole="db_RealtorHomes" />
-          <NavigationProperty Name="db_RealtorReferences" Relationship="Model.FK_RealtorReferences_ClientId" FromRole="db_RealtorClients" ToRole="db_RealtorReferences" />
-          <NavigationProperty Name="db_UserLandlords" Relationship="Model.FK_UserLandlords_ClientId" FromRole="db_RealtorClients" ToRole="db_UserLandlords" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="BeaconId" Type="Int32" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="SurveyAnswer" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="DateSubmitted" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="rb_Companies" Relationship="Self.FK_SurveyAnswers_Companies" FromRole="rb_SurveyAnswers" ToRole="rb_Companies" />
+          <NavigationProperty Name="rb_SurveyBeacons" Relationship="Self.FK_SurveyAnswers_Beacons" FromRole="rb_SurveyAnswers" ToRole="rb_SurveyBeacons" />
+          <NavigationProperty Name="rb_SurveyQuestions" Relationship="Self.FK_SurveyAnswers_SurveyQuestions" FromRole="rb_SurveyAnswers" ToRole="rb_SurveyQuestions" />
         </EntityType>
-        <EntityType Name="db_RealtorEmployments">
+        <EntityType Name="rb_SurveyBeacons">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="AddressId" Type="Int32" />
-          <Property Name="OccupationId" Type="Int32" />
-          <Property Name="SalaryId" Type="Int32" />
-          <Property Name="ReferenceId" Type="Int32" />
-          <NavigationProperty Name="db_RealtorClients" Relationship="Model.FK_Employments_ClientId" FromRole="db_RealtorEmployments" ToRole="db_RealtorClients" />
-          <NavigationProperty Name="db_UserAddresses" Relationship="Model.FK_Employments_Addresses" FromRole="db_RealtorEmployments" ToRole="db_UserAddresses" />
-          <NavigationProperty Name="db_UserOccupations" Relationship="Model.FK_Employments_Occupations" FromRole="db_RealtorEmployments" ToRole="db_UserOccupations" />
-          <NavigationProperty Name="db_UserSalaries" Relationship="Model.FK_Employments_SalaryId" FromRole="db_RealtorEmployments" ToRole="db_UserSalaries" />
-          <NavigationProperty Name="db_UserReferences" Relationship="Model.FK_EmploymentsSupervisor_ReferenceId" FromRole="db_RealtorEmployments" ToRole="db_UserReferences" />
+          <Property Name="CompanyId" Type="Int32" />
+          <NavigationProperty Name="rb_Companies" Relationship="Self.FK_SurveyBeacons_Companies" FromRole="rb_SurveyBeacons" ToRole="rb_Companies" />
+          <NavigationProperty Name="rb_SurveyAnswers" Relationship="Self.FK_SurveyAnswers_Beacons" FromRole="rb_SurveyBeacons" ToRole="rb_SurveyAnswers" />
         </EntityType>
-        <EntityType Name="db_RealtorHomes">
+        <EntityType Name="rb_SurveyQuestions">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="AddressId" Type="Int32" />
-          <Property Name="LeaseId" Type="Int32" />
-          <Property Name="LandlordId" Type="Int32" />
-          <NavigationProperty Name="db_RealtorClients" Relationship="Model.FK_RealtorHomes_ClientId" FromRole="db_RealtorHomes" ToRole="db_RealtorClients" />
-          <NavigationProperty Name="db_UserAddresses" Relationship="Model.FK_RealtorHomes_AddressId" FromRole="db_RealtorHomes" ToRole="db_UserAddresses" />
-          <NavigationProperty Name="db_UserLandlords" Relationship="Model.FK_RealtorHomes_LandlordId" FromRole="db_RealtorHomes" ToRole="db_UserLandlords" />
-          <NavigationProperty Name="db_UserLeases" Relationship="Model.FK_RealtorHomes_LeaseId" FromRole="db_RealtorHomes" ToRole="db_UserLeases" />
-        </EntityType>
-        <EntityType Name="db_RealtorReferences">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="ClientId" Type="Int32" Nullable="false" />
-          <Property Name="ReferenceType" Type="Int32" Nullable="false" />
-          <Property Name="ReferenceId" Type="Int32" />
-          <NavigationProperty Name="db_RealtorClients" Relationship="Model.FK_RealtorReferences_ClientId" FromRole="db_RealtorReferences" ToRole="db_RealtorClients" />
-          <NavigationProperty Name="db_UserReferences" Relationship="Model.FK_RealtorReferences_ReferenceId" FromRole="db_RealtorReferences" ToRole="db_UserReferences" />
-        </EntityType>
-        <EntityType Name="db_UserAccounts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Number" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_Accounts_UserId" FromRole="db_UserAccounts" ToRole="AspNetUser" />
-          <NavigationProperty Name="db_RealtorBanks" Relationship="Model.FK_Banks_Account" FromRole="db_UserAccounts" ToRole="db_RealtorBanks" />
-        </EntityType>
-        <EntityType Name="db_UserAddresses">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Street" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Zip" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ApartmentNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Floor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Neighborhood" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AddressNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_Addresses_UserId" FromRole="db_UserAddresses" ToRole="AspNetUser" />
-          <NavigationProperty Name="db_RealtorBanks" Relationship="Model.FK_Banks_Address" FromRole="db_UserAddresses" ToRole="db_RealtorBanks" />
-          <NavigationProperty Name="db_RealtorEmployments" Relationship="Model.FK_Employments_Addresses" FromRole="db_UserAddresses" ToRole="db_RealtorEmployments" />
-          <NavigationProperty Name="db_RealtorHomes" Relationship="Model.FK_RealtorHomes_AddressId" FromRole="db_UserAddresses" ToRole="db_RealtorHomes" />
-          <NavigationProperty Name="db_UserLandlords" Relationship="Model.FK_UserLandlords_Addresses" FromRole="db_UserAddresses" ToRole="db_UserLandlords" />
-          <NavigationProperty Name="db_UserLandlords1" Relationship="Model.FK_UserLandlords_AddressId" FromRole="db_UserAddresses" ToRole="db_UserLandlords" />
-        </EntityType>
-        <EntityType Name="db_UserContacts">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Phonenumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_Contacts_UserId" FromRole="db_UserContacts" ToRole="AspNetUser" />
-          <NavigationProperty Name="db_RealtorClients" Relationship="Model.FK_Clients_Contacts" FromRole="db_UserContacts" ToRole="db_RealtorClients" />
-          <NavigationProperty Name="db_UserReferences" Relationship="Model.FK_References_ContactId" FromRole="db_UserContacts" ToRole="db_UserReferences" />
-          <NavigationProperty Name="db_UserLandlords" Relationship="Model.FK_UserLandlords_ContactId" FromRole="db_UserContacts" ToRole="db_UserLandlords" />
-        </EntityType>
-        <EntityType Name="db_UserLandlords">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ContactId" Type="Int32" />
-          <Property Name="AddressId" Type="Int32" />
-          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_UserLandlords_UserId" FromRole="db_UserLandlords" ToRole="AspNetUser" />
-          <NavigationProperty Name="db_RealtorClients" Relationship="Model.FK_UserLandlords_ClientId" FromRole="db_UserLandlords" ToRole="db_RealtorClients" />
-          <NavigationProperty Name="db_RealtorHomes" Relationship="Model.FK_RealtorHomes_LandlordId" FromRole="db_UserLandlords" ToRole="db_RealtorHomes" />
-          <NavigationProperty Name="db_UserAddresses" Relationship="Model.FK_UserLandlords_Addresses" FromRole="db_UserLandlords" ToRole="db_UserAddresses" />
-          <NavigationProperty Name="db_UserAddresses1" Relationship="Model.FK_UserLandlords_AddressId" FromRole="db_UserLandlords" ToRole="db_UserAddresses" />
-          <NavigationProperty Name="db_UserContacts" Relationship="Model.FK_UserLandlords_ContactId" FromRole="db_UserLandlords" ToRole="db_UserContacts" />
-        </EntityType>
-        <EntityType Name="db_UserLeases">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MonthlyRent" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="SecurityDeposit" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="garagefee" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="UtilitiesIncludedInRent" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="StartDate" Type="DateTime" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_UserLeases_UserId" FromRole="db_UserLeases" ToRole="AspNetUser" />
-          <NavigationProperty Name="db_RealtorHomes" Relationship="Model.FK_RealtorHomes_LeaseId" FromRole="db_UserLeases" ToRole="db_RealtorHomes" />
-        </EntityType>
-        <EntityType Name="db_UserOccupations">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="StartDate" Type="DateTime" Precision="0" />
-          <Property Name="EndDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_UserOccupations_UserId" FromRole="db_UserOccupations" ToRole="AspNetUser" />
-          <NavigationProperty Name="db_RealtorEmployments" Relationship="Model.FK_Employments_Occupations" FromRole="db_UserOccupations" ToRole="db_RealtorEmployments" />
-        </EntityType>
-        <EntityType Name="db_UserReferences">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Relationship" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ContactId" Type="Int32" />
-          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_References_UserId" FromRole="db_UserReferences" ToRole="AspNetUser" />
-          <NavigationProperty Name="db_RealtorBanks" Relationship="Model.FK_Banks_ReferenceId" FromRole="db_UserReferences" ToRole="db_RealtorBanks" />
-          <NavigationProperty Name="db_RealtorEmployments" Relationship="Model.FK_EmploymentsSupervisor_ReferenceId" FromRole="db_UserReferences" ToRole="db_RealtorEmployments" />
-          <NavigationProperty Name="db_RealtorReferences" Relationship="Model.FK_RealtorReferences_ReferenceId" FromRole="db_UserReferences" ToRole="db_RealtorReferences" />
-          <NavigationProperty Name="db_UserContacts" Relationship="Model.FK_References_ContactId" FromRole="db_UserReferences" ToRole="db_UserContacts" />
-        </EntityType>
-        <EntityType Name="db_UserSalaries">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="LabelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AnnualSalary" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="Bonus" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="OtherIncomeSource" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="OtherIncomeAmount" Type="Decimal" Precision="15" Scale="2" />
-          <Property Name="TotalAnnualIncome" Type="Decimal" Precision="15" Scale="2" />
-          <NavigationProperty Name="AspNetUser" Relationship="Model.FK_Salaries_UserId" FromRole="db_UserSalaries" ToRole="AspNetUser" />
-          <NavigationProperty Name="db_RealtorEmployments" Relationship="Model.FK_Employments_SalaryId" FromRole="db_UserSalaries" ToRole="db_RealtorEmployments" />
+          <Property Name="Question" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="rb_SurveyAnswers" Relationship="Self.FK_SurveyAnswers_SurveyQuestions" FromRole="rb_SurveyQuestions" ToRole="rb_SurveyAnswers" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Model.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserClaim">
+            <Dependent Role="AspNetUserClaims">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="Model.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserLogin">
+            <Dependent Role="AspNetUserLogins">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Accounts_UserId">
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="Model.db_UserAccounts" Role="db_UserAccounts" Multiplicity="*" />
+        <Association Name="FK_SurveyAnswers_Companies">
+          <End Role="rb_Companies" Type="Self.rb_Companies" Multiplicity="0..1" />
+          <End Role="rb_SurveyAnswers" Type="Self.rb_SurveyAnswers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="rb_Companies">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="db_UserAccounts">
-              <PropertyRef Name="UserId" />
+            <Dependent Role="rb_SurveyAnswers">
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Addresses_UserId">
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="Model.db_UserAddresses" Role="db_UserAddresses" Multiplicity="*" />
+        <Association Name="FK_SurveyBeacons_Companies">
+          <End Role="rb_Companies" Type="Self.rb_Companies" Multiplicity="0..1" />
+          <End Role="rb_SurveyBeacons" Type="Self.rb_SurveyBeacons" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="rb_Companies">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="db_UserAddresses">
-              <PropertyRef Name="UserId" />
+            <Dependent Role="rb_SurveyBeacons">
+              <PropertyRef Name="CompanyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Clients_AspNetUsers">
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="Model.db_RealtorClients" Role="db_RealtorClients" Multiplicity="*" />
+        <Association Name="FK_SurveyAnswers_Beacons">
+          <End Role="rb_SurveyBeacons" Type="Self.rb_SurveyBeacons" Multiplicity="0..1" />
+          <End Role="rb_SurveyAnswers" Type="Self.rb_SurveyAnswers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="rb_SurveyBeacons">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="db_RealtorClients">
-              <PropertyRef Name="UserId" />
+            <Dependent Role="rb_SurveyAnswers">
+              <PropertyRef Name="BeaconId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Contacts_UserId">
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="Model.db_UserContacts" Role="db_UserContacts" Multiplicity="*" />
+        <Association Name="FK_SurveyAnswers_SurveyQuestions">
+          <End Role="rb_SurveyQuestions" Type="Self.rb_SurveyQuestions" Multiplicity="1" />
+          <End Role="rb_SurveyAnswers" Type="Self.rb_SurveyAnswers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUser">
+            <Principal Role="rb_SurveyQuestions">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="db_UserContacts">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_References_UserId">
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="Model.db_UserReferences" Role="db_UserReferences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserReferences">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Salaries_UserId">
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="Model.db_UserSalaries" Role="db_UserSalaries" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserSalaries">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserLandlords_UserId">
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="Model.db_UserLandlords" Role="db_UserLandlords" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserLandlords">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserLeases_UserId">
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="Model.db_UserLeases" Role="db_UserLeases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserLeases">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserOccupations_UserId">
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="Model.db_UserOccupations" Role="db_UserOccupations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserOccupations">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Banks_Account">
-          <End Type="Model.db_UserAccounts" Role="db_UserAccounts" Multiplicity="0..1" />
-          <End Type="Model.db_RealtorBanks" Role="db_RealtorBanks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserAccounts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorBanks">
-              <PropertyRef Name="AccountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Banks_Address">
-          <End Type="Model.db_UserAddresses" Role="db_UserAddresses" Multiplicity="0..1" />
-          <End Type="Model.db_RealtorBanks" Role="db_RealtorBanks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserAddresses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorBanks">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Banks_ClientId">
-          <End Type="Model.db_RealtorClients" Role="db_RealtorClients" Multiplicity="1" />
-          <End Type="Model.db_RealtorBanks" Role="db_RealtorBanks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_RealtorClients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorBanks">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Banks_ReferenceId">
-          <End Type="Model.db_UserReferences" Role="db_UserReferences" Multiplicity="0..1" />
-          <End Type="Model.db_RealtorBanks" Role="db_RealtorBanks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserReferences">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorBanks">
-              <PropertyRef Name="ReferenceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Clients_Contacts">
-          <End Type="Model.db_UserContacts" Role="db_UserContacts" Multiplicity="0..1" />
-          <End Type="Model.db_RealtorClients" Role="db_RealtorClients" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserContacts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorClients">
-              <PropertyRef Name="ContactId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Employments_ClientId">
-          <End Type="Model.db_RealtorClients" Role="db_RealtorClients" Multiplicity="1" />
-          <End Type="Model.db_RealtorEmployments" Role="db_RealtorEmployments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_RealtorClients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorEmployments">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RealtorHomes_ClientId">
-          <End Type="Model.db_RealtorClients" Role="db_RealtorClients" Multiplicity="1" />
-          <End Type="Model.db_RealtorHomes" Role="db_RealtorHomes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_RealtorClients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorHomes">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RealtorReferences_ClientId">
-          <End Type="Model.db_RealtorClients" Role="db_RealtorClients" Multiplicity="1" />
-          <End Type="Model.db_RealtorReferences" Role="db_RealtorReferences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_RealtorClients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorReferences">
-              <PropertyRef Name="ClientId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserLandlords_ClientId">
-          <End Type="Model.db_RealtorClients" Role="db_RealtorClients" Multiplicity="1" />
-          <End Type="Model.db_UserLandlords" Role="db_UserLandlords" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_RealtorClients">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserLandlords">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Employments_Addresses">
-          <End Type="Model.db_UserAddresses" Role="db_UserAddresses" Multiplicity="0..1" />
-          <End Type="Model.db_RealtorEmployments" Role="db_RealtorEmployments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserAddresses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorEmployments">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Employments_Occupations">
-          <End Type="Model.db_UserOccupations" Role="db_UserOccupations" Multiplicity="0..1" />
-          <End Type="Model.db_RealtorEmployments" Role="db_RealtorEmployments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserOccupations">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorEmployments">
-              <PropertyRef Name="OccupationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Employments_SalaryId">
-          <End Type="Model.db_UserSalaries" Role="db_UserSalaries" Multiplicity="0..1" />
-          <End Type="Model.db_RealtorEmployments" Role="db_RealtorEmployments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserSalaries">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorEmployments">
-              <PropertyRef Name="SalaryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EmploymentsSupervisor_ReferenceId">
-          <End Type="Model.db_UserReferences" Role="db_UserReferences" Multiplicity="0..1" />
-          <End Type="Model.db_RealtorEmployments" Role="db_RealtorEmployments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserReferences">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorEmployments">
-              <PropertyRef Name="ReferenceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RealtorHomes_AddressId">
-          <End Type="Model.db_UserAddresses" Role="db_UserAddresses" Multiplicity="0..1" />
-          <End Type="Model.db_RealtorHomes" Role="db_RealtorHomes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserAddresses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorHomes">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RealtorHomes_LandlordId">
-          <End Type="Model.db_UserLandlords" Role="db_UserLandlords" Multiplicity="0..1" />
-          <End Type="Model.db_RealtorHomes" Role="db_RealtorHomes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserLandlords">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorHomes">
-              <PropertyRef Name="LandlordId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RealtorHomes_LeaseId">
-          <End Type="Model.db_UserLeases" Role="db_UserLeases" Multiplicity="0..1" />
-          <End Type="Model.db_RealtorHomes" Role="db_RealtorHomes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserLeases">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorHomes">
-              <PropertyRef Name="LeaseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RealtorReferences_ReferenceId">
-          <End Type="Model.db_UserReferences" Role="db_UserReferences" Multiplicity="0..1" />
-          <End Type="Model.db_RealtorReferences" Role="db_RealtorReferences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserReferences">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_RealtorReferences">
-              <PropertyRef Name="ReferenceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserLandlords_Addresses">
-          <End Type="Model.db_UserAddresses" Role="db_UserAddresses" Multiplicity="0..1" />
-          <End Type="Model.db_UserLandlords" Role="db_UserLandlords" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserAddresses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserLandlords">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserLandlords_AddressId">
-          <End Type="Model.db_UserAddresses" Role="db_UserAddresses" Multiplicity="0..1" />
-          <End Type="Model.db_UserLandlords" Role="db_UserLandlords" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserAddresses">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserLandlords">
-              <PropertyRef Name="AddressId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_References_ContactId">
-          <End Type="Model.db_UserContacts" Role="db_UserContacts" Multiplicity="0..1" />
-          <End Type="Model.db_UserReferences" Role="db_UserReferences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserContacts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserReferences">
-              <PropertyRef Name="ContactId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserLandlords_ContactId">
-          <End Type="Model.db_UserContacts" Role="db_UserContacts" Multiplicity="0..1" />
-          <End Type="Model.db_UserLandlords" Role="db_UserLandlords" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="db_UserContacts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="db_UserLandlords">
-              <PropertyRef Name="ContactId" />
+            <Dependent Role="rb_SurveyAnswers">
+              <PropertyRef Name="QuestionId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="AspNetUserRoles">
-          <End Type="Model.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-          <End Type="Model.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
-        </Schema>
+        <EntityContainer Name="ApplicationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="rb_Companies" EntityType="Self.rb_Companies" />
+          <EntitySet Name="rb_SurveyAnswers" EntityType="Self.rb_SurveyAnswers" />
+          <EntitySet Name="rb_SurveyBeacons" EntityType="Self.rb_SurveyBeacons" />
+          <EntitySet Name="rb_SurveyQuestions" EntityType="Self.rb_SurveyQuestions" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyAnswers_Companies" Association="Self.FK_SurveyAnswers_Companies">
+            <End Role="rb_Companies" EntitySet="rb_Companies" />
+            <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyBeacons_Companies" Association="Self.FK_SurveyBeacons_Companies">
+            <End Role="rb_Companies" EntitySet="rb_Companies" />
+            <End Role="rb_SurveyBeacons" EntitySet="rb_SurveyBeacons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyAnswers_Beacons" Association="Self.FK_SurveyAnswers_Beacons">
+            <End Role="rb_SurveyBeacons" EntitySet="rb_SurveyBeacons" />
+            <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyAnswers_SurveyQuestions" Association="Self.FK_SurveyAnswers_SurveyQuestions">
+            <End Role="rb_SurveyQuestions" EntitySet="rb_SurveyQuestions" />
+            <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ApplicationEntities">
+        <EntityContainerMapping StorageEntityContainer="raterbeeModelStoreContainer" CdmEntityContainer="ApplicationEntities">
           <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="Model.C__MigrationHistory">
+            <EntityTypeMapping TypeName="raterbeeModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
                 <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="Model.AspNetRole">
+            <EntityTypeMapping TypeName="raterbeeModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="Model.AspNetUserClaim">
+            <EntityTypeMapping TypeName="raterbeeModel.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="Model.AspNetUserLogin">
+            <EntityTypeMapping TypeName="raterbeeModel.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="Model.AspNetUser">
+            <EntityTypeMapping TypeName="raterbeeModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="db_RealtorBanks">
-            <EntityTypeMapping TypeName="Model.db_RealtorBanks">
-              <MappingFragment StoreEntitySet="db_RealtorBanks">
-                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
-                <ScalarProperty Name="ReferenceId" ColumnName="ReferenceId" />
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <EntitySetMapping Name="rb_Companies">
+            <EntityTypeMapping TypeName="raterbeeModel.rb_Companies">
+              <MappingFragment StoreEntitySet="rb_Companies">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="db_RealtorClients">
-            <EntityTypeMapping TypeName="Model.db_RealtorClients">
-              <MappingFragment StoreEntitySet="db_RealtorClients">
-                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
-                <ScalarProperty Name="ClientUserId" ColumnName="ClientUserId" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="db_RealtorEmployments">
-            <EntityTypeMapping TypeName="Model.db_RealtorEmployments">
-              <MappingFragment StoreEntitySet="db_RealtorEmployments">
-                <ScalarProperty Name="ReferenceId" ColumnName="ReferenceId" />
-                <ScalarProperty Name="SalaryId" ColumnName="SalaryId" />
-                <ScalarProperty Name="OccupationId" ColumnName="OccupationId" />
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="db_RealtorHomes">
-            <EntityTypeMapping TypeName="Model.db_RealtorHomes">
-              <MappingFragment StoreEntitySet="db_RealtorHomes">
-                <ScalarProperty Name="LandlordId" ColumnName="LandlordId" />
-                <ScalarProperty Name="LeaseId" ColumnName="LeaseId" />
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="db_RealtorReferences">
-            <EntityTypeMapping TypeName="Model.db_RealtorReferences">
-              <MappingFragment StoreEntitySet="db_RealtorReferences">
-                <ScalarProperty Name="ReferenceId" ColumnName="ReferenceId" />
-                <ScalarProperty Name="ReferenceType" ColumnName="ReferenceType" />
-                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="db_UserAccounts">
-            <EntityTypeMapping TypeName="Model.db_UserAccounts">
-              <MappingFragment StoreEntitySet="db_UserAccounts">
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="db_UserAddresses">
-            <EntityTypeMapping TypeName="Model.db_UserAddresses">
-              <MappingFragment StoreEntitySet="db_UserAddresses">
-                <ScalarProperty Name="AddressNumber" ColumnName="AddressNumber" />
-                <ScalarProperty Name="Neighborhood" ColumnName="Neighborhood" />
-                <ScalarProperty Name="Floor" ColumnName="Floor" />
-                <ScalarProperty Name="ApartmentNumber" ColumnName="ApartmentNumber" />
-                <ScalarProperty Name="Zip" ColumnName="Zip" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Street" ColumnName="Street" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="db_UserContacts">
-            <EntityTypeMapping TypeName="Model.db_UserContacts">
-              <MappingFragment StoreEntitySet="db_UserContacts">
-                <ScalarProperty Name="Phonenumber" ColumnName="Phonenumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="db_UserLandlords">
-            <EntityTypeMapping TypeName="Model.db_UserLandlords">
-              <MappingFragment StoreEntitySet="db_UserLandlords">
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="db_UserLeases">
-            <EntityTypeMapping TypeName="Model.db_UserLeases">
-              <MappingFragment StoreEntitySet="db_UserLeases">
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="UtilitiesIncludedInRent" ColumnName="UtilitiesIncludedInRent" />
-                <ScalarProperty Name="garagefee" ColumnName="garagefee" />
-                <ScalarProperty Name="SecurityDeposit" ColumnName="SecurityDeposit" />
-                <ScalarProperty Name="MonthlyRent" ColumnName="MonthlyRent" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="db_UserOccupations">
-            <EntityTypeMapping TypeName="Model.db_UserOccupations">
-              <MappingFragment StoreEntitySet="db_UserOccupations">
-                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="db_UserReferences">
-            <EntityTypeMapping TypeName="Model.db_UserReferences">
-              <MappingFragment StoreEntitySet="db_UserReferences">
-                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <EntitySetMapping Name="rb_SurveyAnswers">
+            <EntityTypeMapping TypeName="raterbeeModel.rb_SurveyAnswers">
+              <MappingFragment StoreEntitySet="rb_SurveyAnswers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="BeaconId" ColumnName="BeaconId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="SurveyAnswer" ColumnName="SurveyAnswer" />
+                <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="db_UserSalaries">
-            <EntityTypeMapping TypeName="Model.db_UserSalaries">
-              <MappingFragment StoreEntitySet="db_UserSalaries">
-                <ScalarProperty Name="TotalAnnualIncome" ColumnName="TotalAnnualIncome" />
-                <ScalarProperty Name="OtherIncomeAmount" ColumnName="OtherIncomeAmount" />
-                <ScalarProperty Name="OtherIncomeSource" ColumnName="OtherIncomeSource" />
-                <ScalarProperty Name="Bonus" ColumnName="Bonus" />
-                <ScalarProperty Name="AnnualSalary" ColumnName="AnnualSalary" />
-                <ScalarProperty Name="LabelName" ColumnName="LabelName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <EntitySetMapping Name="rb_SurveyBeacons">
+            <EntityTypeMapping TypeName="raterbeeModel.rb_SurveyBeacons">
+              <MappingFragment StoreEntitySet="rb_SurveyBeacons">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUser">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="AspNetRole">
+          <EntitySetMapping Name="rb_SurveyQuestions">
+            <EntityTypeMapping TypeName="raterbeeModel.rb_SurveyQuestions">
+              <MappingFragment StoreEntitySet="rb_SurveyQuestions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="raterbeeModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

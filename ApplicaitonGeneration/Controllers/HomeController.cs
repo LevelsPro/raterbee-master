@@ -1,24 +1,27 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using ApplicationGeneration.DAL;
-using ApplicaitonGeneration;
-using System.Collections.Generic;
-using Microsoft.AspNet.Identity;
+﻿using System.Web.Mvc;
 
-namespace ApplicationGeneration
+namespace ApplicationGeneration.Controllers
 {
     public class HomeController : Controller
     {
-        private IUnitOfWork _unitOfWork;
-        public HomeController()
-        {
-            _unitOfWork = new UnitOfWork(new ApplicationEntities());
-        }
-
         public ActionResult Index()
         {
+            ViewBag.Message = "RaterBee";
+            return View();
+        }
 
-            ViewBag.ShowBackground = true;
+        [Authorize]
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your app description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
             return View();
         }
     }

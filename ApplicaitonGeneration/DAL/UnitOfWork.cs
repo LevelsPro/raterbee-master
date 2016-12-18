@@ -1,4 +1,4 @@
-﻿using ApplicaitonGeneration;
+﻿using ApplicationGeneration;
 using ApplicationGeneration.DAL.Implementations;
 using ApplicationGeneration.DAL.Interfaces;
 using System;
@@ -14,19 +14,10 @@ namespace ApplicationGeneration.DAL
 
         public IAspNetUserRepository Users { get; private set; }
         public IAspNetRoleRepository Roles { get; private set; }
-        public IRealtorClientRepository RealtorClients { get; private set; }
-        public IRealtorHomeRepository RealtorHomes { get; private set; }
-        public IRealtorEmploymentRepository RealtorEmployments { get; private set; }
-        public IRealtorBankRepository RealtorBanks { get; private set; }
-        public IRealtorReferenceRepository RealtorReferences { get; private set; }
-        public IUserAccountRepository UserAccounts { get; private set; }
-        public IUserAddressRepository UserAddresses { get; private set; }
-        public IUserContactRepository UserContacts { get; private set; }
-        public IUserLandlordRepository UserLandlords { get; private set; }
-        public IUserLeaseRepository UserLeases { get; private set; }
-        public IUserReferenceRepository UserReferences { get; private set; }
-        public IUserSalaryRepository UserSalaries { get; private set; }
-        public IUserOccupationRepository UserOccupations { get; private set; }
+        public ISurveyAnswerRepository SurveyAnswers { get; }
+        public ISurveyQuestionRepository SurveyQuestions { get; }
+        public ICompanyRepository Companies { get; }
+        public IBeaconRepository Beacons { get; }
 
         public UnitOfWork(ApplicationEntities context)
         {
@@ -34,19 +25,10 @@ namespace ApplicationGeneration.DAL
 
             Users = new AspNetUserRepository(_context);
             Roles = new AspNetRoleRepository(_context);
-            RealtorClients = new RealtorClientRepository(_context);
-            RealtorHomes = new RealtorHomeRepository(_context);
-            RealtorEmployments = new RealtorEmploymentRepository(_context);
-            RealtorBanks = new RealtorBankRepository(_context);
-            RealtorReferences = new RealtorReferenceRepository(_context);
-            UserAccounts = new UserAccountRepository(_context);
-            UserAddresses = new UserAddressRepository(_context);
-            UserContacts = new UserContactRepository(_context);
-            UserLandlords = new UserLandlordRepository(_context);
-            UserLeases = new UserLeaseRepository(_context);
-            UserReferences = new UserReferenceRepository(_context);
-            UserSalaries = new UserSalaryRepository(_context);
-            UserOccupations = new UserOccupationRepository(_context);
+            Companies = new CompanyRepository(_context);
+            Beacons = new BeaconRepository(_context);
+            SurveyAnswers = new SurveyAnswerRepository(_context);
+            SurveyQuestions = new SurveyQuestionRepository(_context);
         }
 
         public int Complete()

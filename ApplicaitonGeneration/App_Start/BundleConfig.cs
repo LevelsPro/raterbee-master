@@ -9,10 +9,6 @@ namespace ApplicationGeneration
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/javascript/jquery-{version}.js"
-                        //"~/bower_components/react/react.js",
-                        //"~/bower_components/react/react-dom.js",
-                        //"~/bower_components/react/react-dom-server.js",
-                        //"~/bower_components/react/react-with-addons.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -24,15 +20,12 @@ namespace ApplicationGeneration
                         "~/Scripts/javascript/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      //"~/bower_components/react-bootstrap/react-bootstrap.js",
                       "~/Scripts/javascript/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            //bundles.Add(new StyleBundle("~/bundles/main").Include(
-            //        "~/Scripts/reactjs/document.jsx"));
         }
     }
 }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ApplicaitonGeneration
+namespace ApplicationGeneration
 {
     using System;
     using System.Collections.Generic;

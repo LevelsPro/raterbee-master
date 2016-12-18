@@ -10,9 +10,9 @@ namespace ApplicationGeneration
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "RealtorDocument",
-                url: "realtordocument",
-                defaults: new { controller = "RealtorDocument", action = "Index" }
+                name: "Document",
+                url: "document",
+                defaults: new { controller = "Document", action = "Index" }
             );
 
             routes.MapRoute(

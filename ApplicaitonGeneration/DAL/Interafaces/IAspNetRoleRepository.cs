@@ -1,4 +1,4 @@
-﻿using ApplicaitonGeneration;
+﻿using ApplicationGeneration;
 
 namespace ApplicationGeneration.DAL.Interfaces
 {

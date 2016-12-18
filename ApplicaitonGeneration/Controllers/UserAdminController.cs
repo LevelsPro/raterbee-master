@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace ApplicationGeneration.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "SuperAdmin")]
     public class UsersAdminController : Controller
     {
         public UsersAdminController()

@@ -1,26 +1,11 @@
-﻿
+﻿@{
+    ViewBag.Title = "Home Page";
+}
 
-<div class="text-center" style="padding-top:100px;margin: 0;">
-    @if (Request.IsAuthenticated)
-    {
-        <h1 class="headerh1">Welcome to Application Generation</h1>
-        <h3>Add Clients &amp; Generate ANY Residential Paperwork as needed.</h3>
-        <br />
-        <br />
-        <br />
-        <a href="/RealtorDocument" class="btn btn-dark btn-lg">Start generating now</a>
-    }
-    else
-    {
-        
-        <h1 class="headerh1">Application Generation</h1>
-        <h1>Scribbled, Scrapped, Sealed.</h1>
-        <h1>Oragnize your information gathering today.</h1>
-        <br />
-        <br />
-        <br />
-        <a href="/Account/Register" class="btn btn-dark btn-lg">Register, and get Operating Now...</a>
-        <span style="font-size:25px;padding-left:10px;padding-right:10px;">OR</span>
-        <a href="/RealtorDocument" class="btn btn-dark btn-lg">Check out Document Tool</a>
-    }
+<div class="jumbotron" style="background-color:white;">
+    <h1>Welcome to RaterBee</h1>
+</div>
+
+<div class="row">
+    
 </div>

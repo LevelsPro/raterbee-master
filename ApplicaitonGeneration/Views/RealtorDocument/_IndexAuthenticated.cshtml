@@ -1,8 +1,0 @@
-﻿@using Microsoft.AspNet.Identity;
-
-
-<div id="content">
-    <div class="row" style="margin-top:60px;"></div>
-        @Html.React("Components.Document", new { Authenticated = true, UserId = User.Identity.GetUserId<int>(), RealtorClient = Model })
-        @Html.AntiForgeryToken()
-</div>

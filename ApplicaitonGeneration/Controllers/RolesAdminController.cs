@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace ApplicationGeneration.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "SuperAdmin")]
     public class RolesAdminController : Controller
     {
         public RolesAdminController()
@@ -55,7 +55,7 @@ namespace ApplicationGeneration.Controllers
         // GET: /Roles/
         public ActionResult Index()
         {
-            return View(RoleManager.Roles);
+            return View(RoleManager.Roles.ToList());
         }
 
         //

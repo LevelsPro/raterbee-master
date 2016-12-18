@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Thanks!";
+}
+
+<hgroup>
+    <h1 class="text-error">Thanks!</h1>
+    <h2 class="text-error">You've completed our survey.</h2>
+</hgroup>
+    @using (Html.BeginForm("Email", "Survey", FormMethod.Post))
+    {
+        <div>
+            @Html.AntiForgeryToken()
+            <input name="Email" type="text" placeholder="Enter Email" />
+            <button type="submit" class="btn">Send</button>
+        </div>
+    }

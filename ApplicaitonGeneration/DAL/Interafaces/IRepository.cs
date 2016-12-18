@@ -16,8 +16,6 @@ namespace ApplicationGeneration.DAL.Interfaces
 
         TEntity Add(TEntity entity);
         void AddRange(IEnumerable<TEntity> entities);
-        void Attach(TEntity entity);
-        void RemoveById(int Id);
 
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
