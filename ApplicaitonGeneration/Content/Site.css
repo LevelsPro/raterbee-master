@@ -95,3 +95,13 @@ input[type="checkbox"].input-validation-error {
   top:2px;
   left:2px;
 }
+
+
+/*--Input line underneath*/
+.input-borderbottom {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid #979797;
+    width: 20px;
+}

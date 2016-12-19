@@ -3,9 +3,54 @@
 @{
     ViewBag.Title = "Index";
 }
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var resultArray = [];
+        var array = @Html.Raw(Json.Encode(@ViewBag.AnswerChart));
+        resultArray[0] = [array[0][0], array[0][0]];
+        for (var i = 1; i < array.length; i++)
+        {
+            resultArray[i] = [array[i][0], parseInt(array[i][1])];
+        }
+        var data = google.visualization.arrayToDataTable(resultArray);
 
-<h2>Index</h2>
+        var options = {
+            title: 'Survey Answers over all Questions'
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
 
+    google.charts.setOnLoadCallback(drawChart2);
+    function drawChart2() {
+        var resultArray = [];
+        var array = @Html.Raw(Json.Encode(@ViewBag.QuestionChart));
+        resultArray[0] = [array[0][0], array[0][0]];
+        for (var i = 1; i < array.length; i++)
+        {
+            resultArray[i] = [array[i][0], parseInt(array[i][1])];
+        }
+        var data = google.visualization.arrayToDataTable(resultArray);
+        var options = {
+            title: 'Survey Question Answered'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
+
+        chart.draw(data, options);
+    }
+</script>
+<div class="row">
+    <div class="col-xs-6">
+        <div id="piechart" style="height: 400px;"></div>
+    </div>
+    <div class="col-xs-6">
+        <div id="piechart2" style="height: 400px;"></div>
+    </div>
+</div>
 <table class="table">
     <tr>
         <th>
@@ -25,7 +70,7 @@
         </th>
         @*<th>
 
-        </th>*@
+            </th>*@
     </tr>
 
     @foreach (var item in Model)
