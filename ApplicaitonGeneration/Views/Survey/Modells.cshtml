@@ -1,5 +1,5 @@
 ﻿@model ApplicationGeneration.Models.SurveyModel
-@{ 
+@{
     Layout = "";
 }
 <html>
@@ -11,9 +11,6 @@
     <meta name="description" content="Modells store info">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bootstrap")
 
 </head>
 <body style="padding-top:10px">
@@ -22,6 +19,9 @@
         @Html.React("Components.ModellsSurveyForm", new { CompanyId = Model.CompanyId, BeaconId = Model.BeaconId, Authenticated = false })
     </div>
 
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.0/react-dom.js"></script>
 
@@ -31,5 +31,6 @@
 
     <script src="@Url.Content("~/build/client.bundle.js")"></script>
     @Html.ReactInitJavaScript()
+
 </body>
 </html>
