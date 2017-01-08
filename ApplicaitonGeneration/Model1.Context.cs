@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ApplicationGeneration
+namespace ApplicaitonGeneration
 {
     using System;
     using System.Data.Entity;

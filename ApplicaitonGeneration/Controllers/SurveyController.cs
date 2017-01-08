@@ -1,4 +1,5 @@
-﻿using ApplicationGeneration;
+﻿using ApplicaitonGeneration;
+using ApplicationGeneration;
 using ApplicationGeneration.DAL;
 using ApplicationGeneration.Helpers;
 using ApplicationGeneration.Models;
@@ -70,11 +71,14 @@ namespace ApplicationGeneration.Controllers
             return View(new SurveyModel() { CompanyId = 1 });
         }
 
-        public ActionResult Thanks()
+        public ActionResult Thanks(string name)
         {
+            if (!string.IsNullOrEmpty(name))
+            {
+                return View(name + "ThanksYou");
+            }
             return View();
         }
-
         [HttpPost]
         public ActionResult New(SurveyModel model)
         {
@@ -92,10 +96,22 @@ namespace ApplicationGeneration.Controllers
                         DateSubmitted = timenow
                     });
                 }
-                _unitOfWork.Complete();
+                _unitOfWork.Complete(); 
             }
 
-            return View("Thanks");
+            var beacon = _unitOfWork.Beacons.Find(b => b.Id == model.BeaconId).FirstOrDefault();
+            if (beacon != null)
+            {
+                var companyId = beacon.rb_Companies.Id;
+                var companyName = beacon.rb_Companies.CompanyName.Trim();
+                var removeThankYouPage = beacon.RemoveThankYouPage.HasValue ? beacon.RemoveThankYouPage.Value : false;
+                if (removeThankYouPage)
+                {
+                    return Json(new { RedirectTo = "/Survey/new/" + beacon.Id } );
+                }
+                return Json(new { RedirectTo = "/Survey/Thanks/?name=" + companyName });
+            }
+            return Json(new { RedirectTo = "/Survey/Thanks" });
         }
 
         [HttpPost]

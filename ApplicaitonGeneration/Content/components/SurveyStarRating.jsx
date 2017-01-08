@@ -18,8 +18,17 @@ var SurveyStarRating = React.createClass({
         this.props.onChange(Id, Text);
     },
     render () {
+        var bs = '3px 3px 5px ' + this.props.backgroundshadow;
         return (
-            <div className="row" style={{ boxShadow: '3px 3px 5px #888888', borderRadius: '10px', paddingTop: '10px',paddingBottom:'10px', marginTop: '10px', background: 'lightblue'}}>
+            <div className="row" style={{
+                boxShadow: bs,
+                borderRadius: '10px',
+                paddingTop: '10px',
+                paddingBottom: '10px',
+                marginTop: '10px',
+                border: '1px solid black',
+                background: 'white'
+            }}>
                 <div className="col-xs-5" style={column}>
                     <div style={titleText} className="">{this.props.question}</div>
                 </div>

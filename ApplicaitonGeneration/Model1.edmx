@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="raterbeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="raterbeeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -72,7 +72,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CompanyName" Type="nchar" MaxLength="100" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="rb_SurveyAnswers">
           <Key>
@@ -82,7 +82,7 @@
           <Property Name="QuestionId" Type="int" Nullable="false" />
           <Property Name="BeaconId" Type="int" />
           <Property Name="CompanyId" Type="int" />
-          <Property Name="SurveyAnswer" Type="nchar" MaxLength="100" />
+          <Property Name="SurveyAnswer" Type="nvarchar" MaxLength="100" />
           <Property Name="DateSubmitted" Type="datetime" />
         </EntityType>
         <EntityType Name="rb_SurveyBeacons">
@@ -91,13 +91,14 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CompanyId" Type="int" />
+          <Property Name="RemoveThankYouPage" Type="bit" />
         </EntityType>
         <EntityType Name="rb_SurveyQuestions">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Question" Type="nchar" MaxLength="100" />
+          <Property Name="Question" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -247,28 +248,66 @@
             <End Role="rb_SurveyBeacons" EntitySet="rb_SurveyBeacons" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="raterbeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ApplicationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="raterbeeModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="raterbeeModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="raterbeeModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="raterbeeModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="raterbeeModel.AspNetUser" />
+          <EntitySet Name="rb_Companies" EntityType="raterbeeModel.rb_Companies" />
+          <EntitySet Name="rb_SurveyAnswers" EntityType="raterbeeModel.rb_SurveyAnswers" />
+          <EntitySet Name="rb_SurveyBeacons" EntityType="raterbeeModel.rb_SurveyBeacons" />
+          <EntitySet Name="rb_SurveyQuestions" EntityType="raterbeeModel.rb_SurveyQuestions" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="raterbeeModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="raterbeeModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyAnswers_Companies" Association="raterbeeModel.FK_SurveyAnswers_Companies">
+            <End Role="rb_Companies" EntitySet="rb_Companies" />
+            <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyBeacons_Companies" Association="raterbeeModel.FK_SurveyBeacons_Companies">
+            <End Role="rb_Companies" EntitySet="rb_Companies" />
+            <End Role="rb_SurveyBeacons" EntitySet="rb_SurveyBeacons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyAnswers_Beacons" Association="raterbeeModel.FK_SurveyAnswers_Beacons">
+            <End Role="rb_SurveyBeacons" EntitySet="rb_SurveyBeacons" />
+            <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyAnswers_SurveyQuestions" Association="raterbeeModel.FK_SurveyAnswers_SurveyQuestions">
+            <End Role="rb_SurveyQuestions" EntitySet="rb_SurveyQuestions" />
+            <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="raterbeeModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
             <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="raterbeeModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserClaim">
           <Key>
@@ -278,7 +317,7 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser" Relationship="raterbeeModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUserLogin">
           <Key>
@@ -286,10 +325,10 @@
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUser" Relationship="raterbeeModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="AspNetUser">
           <Key>
@@ -306,20 +345,20 @@
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="CompanyId" Type="Int32" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="raterbeeModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="raterbeeModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="raterbeeModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
         </EntityType>
         <EntityType Name="rb_Companies">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="rb_SurveyAnswers" Relationship="Self.FK_SurveyAnswers_Companies" FromRole="rb_Companies" ToRole="rb_SurveyAnswers" />
-          <NavigationProperty Name="rb_SurveyBeacons" Relationship="Self.FK_SurveyBeacons_Companies" FromRole="rb_Companies" ToRole="rb_SurveyBeacons" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="rb_SurveyAnswers" Relationship="raterbeeModel.FK_SurveyAnswers_Companies" FromRole="rb_Companies" ToRole="rb_SurveyAnswers" />
+          <NavigationProperty Name="rb_SurveyBeacons" Relationship="raterbeeModel.FK_SurveyBeacons_Companies" FromRole="rb_Companies" ToRole="rb_SurveyBeacons" />
         </EntityType>
         <EntityType Name="rb_SurveyAnswers">
           <Key>
@@ -329,11 +368,11 @@
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <Property Name="BeaconId" Type="Int32" />
           <Property Name="CompanyId" Type="Int32" />
-          <Property Name="SurveyAnswer" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="SurveyAnswer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DateSubmitted" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="rb_Companies" Relationship="Self.FK_SurveyAnswers_Companies" FromRole="rb_SurveyAnswers" ToRole="rb_Companies" />
-          <NavigationProperty Name="rb_SurveyBeacons" Relationship="Self.FK_SurveyAnswers_Beacons" FromRole="rb_SurveyAnswers" ToRole="rb_SurveyBeacons" />
-          <NavigationProperty Name="rb_SurveyQuestions" Relationship="Self.FK_SurveyAnswers_SurveyQuestions" FromRole="rb_SurveyAnswers" ToRole="rb_SurveyQuestions" />
+          <NavigationProperty Name="rb_Companies" Relationship="raterbeeModel.FK_SurveyAnswers_Companies" FromRole="rb_SurveyAnswers" ToRole="rb_Companies" />
+          <NavigationProperty Name="rb_SurveyBeacons" Relationship="raterbeeModel.FK_SurveyAnswers_Beacons" FromRole="rb_SurveyAnswers" ToRole="rb_SurveyBeacons" />
+          <NavigationProperty Name="rb_SurveyQuestions" Relationship="raterbeeModel.FK_SurveyAnswers_SurveyQuestions" FromRole="rb_SurveyAnswers" ToRole="rb_SurveyQuestions" />
         </EntityType>
         <EntityType Name="rb_SurveyBeacons">
           <Key>
@@ -341,48 +380,49 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompanyId" Type="Int32" />
-          <NavigationProperty Name="rb_Companies" Relationship="Self.FK_SurveyBeacons_Companies" FromRole="rb_SurveyBeacons" ToRole="rb_Companies" />
-          <NavigationProperty Name="rb_SurveyAnswers" Relationship="Self.FK_SurveyAnswers_Beacons" FromRole="rb_SurveyBeacons" ToRole="rb_SurveyAnswers" />
+          <Property Name="RemoveThankYouPage" Type="Boolean" />
+          <NavigationProperty Name="rb_Companies" Relationship="raterbeeModel.FK_SurveyBeacons_Companies" FromRole="rb_SurveyBeacons" ToRole="rb_Companies" />
+          <NavigationProperty Name="rb_SurveyAnswers" Relationship="raterbeeModel.FK_SurveyAnswers_Beacons" FromRole="rb_SurveyBeacons" ToRole="rb_SurveyAnswers" />
         </EntityType>
         <EntityType Name="rb_SurveyQuestions">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Question" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="rb_SurveyAnswers" Relationship="Self.FK_SurveyAnswers_SurveyQuestions" FromRole="rb_SurveyQuestions" ToRole="rb_SurveyAnswers" />
+          <Property Name="Question" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="rb_SurveyAnswers" Relationship="raterbeeModel.FK_SurveyAnswers_SurveyQuestions" FromRole="rb_SurveyQuestions" ToRole="rb_SurveyAnswers" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Type="raterbeeModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <End Type="raterbeeModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserClaims">
+            <Dependent Role="AspNetUserClaim">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Type="raterbeeModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <End Type="raterbeeModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
+            <Principal Role="AspNetUser">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="AspNetUserLogins">
+            <Dependent Role="AspNetUserLogin">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SurveyAnswers_Companies">
-          <End Role="rb_Companies" Type="Self.rb_Companies" Multiplicity="0..1" />
-          <End Role="rb_SurveyAnswers" Type="Self.rb_SurveyAnswers" Multiplicity="*" />
+          <End Type="raterbeeModel.rb_Companies" Role="rb_Companies" Multiplicity="0..1" />
+          <End Type="raterbeeModel.rb_SurveyAnswers" Role="rb_SurveyAnswers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rb_Companies">
               <PropertyRef Name="Id" />
@@ -393,8 +433,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SurveyBeacons_Companies">
-          <End Role="rb_Companies" Type="Self.rb_Companies" Multiplicity="0..1" />
-          <End Role="rb_SurveyBeacons" Type="Self.rb_SurveyBeacons" Multiplicity="*" />
+          <End Type="raterbeeModel.rb_Companies" Role="rb_Companies" Multiplicity="0..1" />
+          <End Type="raterbeeModel.rb_SurveyBeacons" Role="rb_SurveyBeacons" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rb_Companies">
               <PropertyRef Name="Id" />
@@ -405,8 +445,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SurveyAnswers_Beacons">
-          <End Role="rb_SurveyBeacons" Type="Self.rb_SurveyBeacons" Multiplicity="0..1" />
-          <End Role="rb_SurveyAnswers" Type="Self.rb_SurveyAnswers" Multiplicity="*" />
+          <End Type="raterbeeModel.rb_SurveyBeacons" Role="rb_SurveyBeacons" Multiplicity="0..1" />
+          <End Type="raterbeeModel.rb_SurveyAnswers" Role="rb_SurveyAnswers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rb_SurveyBeacons">
               <PropertyRef Name="Id" />
@@ -417,8 +457,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SurveyAnswers_SurveyQuestions">
-          <End Role="rb_SurveyQuestions" Type="Self.rb_SurveyQuestions" Multiplicity="1" />
-          <End Role="rb_SurveyAnswers" Type="Self.rb_SurveyAnswers" Multiplicity="*" />
+          <End Type="raterbeeModel.rb_SurveyQuestions" Role="rb_SurveyQuestions" Multiplicity="1" />
+          <End Type="raterbeeModel.rb_SurveyAnswers" Role="rb_SurveyAnswers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rb_SurveyQuestions">
               <PropertyRef Name="Id" />
@@ -429,48 +469,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+          <End Type="raterbeeModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="raterbeeModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="ApplicationEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="rb_Companies" EntityType="Self.rb_Companies" />
-          <EntitySet Name="rb_SurveyAnswers" EntityType="Self.rb_SurveyAnswers" />
-          <EntitySet Name="rb_SurveyBeacons" EntityType="Self.rb_SurveyBeacons" />
-          <EntitySet Name="rb_SurveyQuestions" EntityType="Self.rb_SurveyQuestions" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyAnswers_Companies" Association="Self.FK_SurveyAnswers_Companies">
-            <End Role="rb_Companies" EntitySet="rb_Companies" />
-            <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyBeacons_Companies" Association="Self.FK_SurveyBeacons_Companies">
-            <End Role="rb_Companies" EntitySet="rb_Companies" />
-            <End Role="rb_SurveyBeacons" EntitySet="rb_SurveyBeacons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyAnswers_Beacons" Association="Self.FK_SurveyAnswers_Beacons">
-            <End Role="rb_SurveyBeacons" EntitySet="rb_SurveyBeacons" />
-            <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyAnswers_SurveyQuestions" Association="Self.FK_SurveyAnswers_SurveyQuestions">
-            <End Role="rb_SurveyQuestions" EntitySet="rb_SurveyQuestions" />
-            <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -480,101 +481,102 @@
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="raterbeeModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="raterbeeModel.AspNetRole">
               <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
             <EntityTypeMapping TypeName="raterbeeModel.AspNetUserClaim">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
                 <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
             <EntityTypeMapping TypeName="raterbeeModel.AspNetUserLogin">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="raterbeeModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="rb_Companies">
             <EntityTypeMapping TypeName="raterbeeModel.rb_Companies">
               <MappingFragment StoreEntitySet="rb_Companies">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="rb_SurveyAnswers">
             <EntityTypeMapping TypeName="raterbeeModel.rb_SurveyAnswers">
               <MappingFragment StoreEntitySet="rb_SurveyAnswers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
-                <ScalarProperty Name="BeaconId" ColumnName="BeaconId" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="SurveyAnswer" ColumnName="SurveyAnswer" />
                 <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
+                <ScalarProperty Name="SurveyAnswer" ColumnName="SurveyAnswer" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="BeaconId" ColumnName="BeaconId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="rb_SurveyBeacons">
             <EntityTypeMapping TypeName="raterbeeModel.rb_SurveyBeacons">
               <MappingFragment StoreEntitySet="rb_SurveyBeacons">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RemoveThankYouPage" ColumnName="RemoveThankYouPage" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="rb_SurveyQuestions">
             <EntityTypeMapping TypeName="raterbeeModel.rb_SurveyQuestions">
               <MappingFragment StoreEntitySet="rb_SurveyQuestions">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="AspNetUserRoles" TypeName="raterbeeModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
+            <EndProperty Name="AspNetUser">
               <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

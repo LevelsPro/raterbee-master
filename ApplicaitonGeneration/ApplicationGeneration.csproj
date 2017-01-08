@@ -332,6 +332,8 @@
   <ItemGroup>
     <Content Include="Build\client.bundle.js" />
     <Content Include="Build\server.bundle.js" />
+    <Content Include="Content\bodyandpole.png" />
+    <Content Include="Content\bodyandpolefulllogowhite.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\components\index.js" />
@@ -376,6 +378,8 @@
     <Content Include="package.json" />
     <Content Include="Content\components\SurveyForm.jsx" />
     <Content Include="Content\components\ModellsSurveyForm.jsx" />
+    <Content Include="Content\components\SurveyStarRating.jsx" />
+    <Content Include="Content\components\BodyAndPoleSurveyForm.jsx" />
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -383,7 +387,6 @@
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\components\SurveyStarRating.jsx" />
     <None Include="Properties\PublishProfiles\RaterBee - FTP.pubxml" />
     <None Include="Scripts\javascript\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\javascript\jquery-1.10.2.js" />
@@ -448,6 +451,10 @@
     <Content Include="Views\Survey\WinterWear.cshtml" />
     <Content Include="Views\Shared\EmailSent.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Survey\BodyAndPole.cshtml" />
+    <Content Include="Views\Survey\BodyAndPoleThanksYou.cshtml" />
+    <Content Include="Views\Survey\ModellsThanksYou.cshtml" />
+    <Content Include="Views\Survey\WinterWearThanksYou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

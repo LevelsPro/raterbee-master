@@ -37,7 +37,6 @@ var SurveyForm = React.createClass({
             }
         }
 
-
         var data = {
             model: {
                 CompanyId: this.props.CompanyId,
@@ -61,7 +60,6 @@ var SurveyForm = React.createClass({
             }
         }.bind(this);
         xhr.send(JSON.stringify(data));
-
         //var xhr = new XMLHttpRequest();
         //xhr.open('get', this.props.submitUrl + "?" + parameters, true);
         //xhr.send();
@@ -69,47 +67,59 @@ var SurveyForm = React.createClass({
     },
     render () {
         var count = 1;
+        // <div className="col-xs-6" style={{padding:'0px 0px 0px 0px', margin:'5px 0px 0px 0px'}}>
+        //    <div style={{ height: '41px', backgroundColor: 'white', marginLeft:'5px', marginRight:'6px'}}></div>
+        //</div>
+        //<h3 style={{fontWeight: '900' , backgroundColor: 'FF5733' ,
+        //    textAlign:'center', margin: '0px 20px 0px 20px' , paddingTop: '10px' , paddingBottom:'10px'}}>
+        //    Shopping Experience
+        //</h3>
         return (
         <div>
             <div className="row" style={{padding:'0px 0px 0px 0px', margin:'0px 0px 0px 0px' }}>
-                <div className="col-xs-6" style={{ left: '5px', padding:'0px 0px 0px 0px', margin:'0px 0px 0px 0px' }}>
-                    <img style={{ height: '53px', paddingBottom: '3px' }} src={'/Content/wwbw-3.png'} alt="boohoo" className="img-responsive" />
-                </div>
-                <div className="col-xs-6" style={{padding:'0px 0px 0px 0px', margin:'0px 0px 0px 0px'}}>
-                    <div style={{ height: '50px', backgroundColor: 'black', marginLeft:'7px', marginRight:'6px'}}></div>
-
-                </div>
-             </div>
-            <div className="row" style={{ paddingTop: '0px' , marginTop: '0px' }}>
-                <div className="col-xs-12" style={{paddingRight: '0px' , paddingLeft: '0px' }}>
-                    <h3 style={{fontWeight: '900' , backgroundColor: 'FF5733' , 
-                        textAlign:'center', margin: '0px 20px 0px 20px' , paddingTop: '10px' , paddingBottom:'10px'}}>Shopping Experience</h3>
+                <div className="col-xs-12" style={{ left: '5px', padding:'0px 0px 0px 0px', margin:'0px 0px 0px 0px' }}>
+                    <img style={{paddingBottom: '3px' }} src={'/Content/bodyandpole.png'} alt="boohoo" className="img-responsive" />
                 </div>
             </div>
-              <div className="row">
+            <div className="row" style={{ borderStyle: 'solid', border: 'thick solid #EC2E91' }}></div>
+            <div className="row" style={{ paddingTop: '0px' , marginTop: '0px' }}>
+                <div className="col-xs-12" style={{paddingRight: '0px' , paddingLeft: '0px' }}>
+                    <h5 style={{fontWeight: '900' , textAlign:'center', margin: '0px 0px 0px 0px' , paddingTop: '16px' , paddingBottom:'8px'}}>
+                        Please rate each of the following
+                    </h5>
+                </div>
+            </div>
+            <div className="row">
               <div className="col-xs-1"></div>
               <div className="col-xs-10">
                   <div>
                       <form method="POST" onSubmit={this.handleSubmit }>
-                             <h5 style={{fontWeight: '900' , textAlign:'center', margin: '0px 0px 0px 0px' , paddingTop: '16px' , paddingBottom:'8px'}}>
-                                 Please rate each of the following
-                             </h5>
-                            <SurveyStarRating question="Satisfaction" raitingid="1" backgroundshadow='#888888' onChange={this.handleChange} />
-                            <SurveyStarRating question="Staff" raitingid="2" backgroundshadow='#888888' onChange={this.handleChange} />
-                            <SurveyStarRating question="Found It!" raitingid="3" backgroundshadow='#888888' onChange={this.handleChange} />
-                            <SurveyStarRating question="Wait to pay" raitingid="4" backgroundshadow='#888888' onChange={this.handleChange} />
+                            <SurveyStarRating question="Satisfaction" raitingid="1" backgroundshadow='white' onChange={this.handleChange} />
+                            <SurveyStarRating question="Staff" raitingid="2" backgroundshadow='white' onChange={this.handleChange} />
+                            <SurveyStarRating question="Found It!" raitingid="3" backgroundshadow='white' onChange={this.handleChange} />
+                            <SurveyStarRating question="Wait to pay" raitingid="4" backgroundshadow='white' onChange={this.handleChange} />
                               <div className="row">
                                   <div className="col-xs-4"></div>
                                   <div className="col-xs-4">
-                                    <button type="submit" style={{ boxShadow: '3px 3px 5px #888888', height: '40px', fontWeight: '900', width: '95px', backgroundColor: 'FF5733', textAlign: 'center', marginTop: '30px' }} className="btn btn-submit">Submit</button>
+                                    <button type="submit" style={{
+                                            boxShadow: '3px 3px 5px #888888', height: '40px',
+                                            fontWeight: '900',
+                                            width: '95px',
+                                            backgroundColor: 'EC2E91',
+                                            color:'white',
+                                            textAlign: 'center',
+                                            marginTop: '30px'
+                                        }} className="btn btn-submit">
+                                        Submit
+                                    </button>
                                   </div>
-                               </div>
-                        </form>
+                              </div>
+                      </form>
                   </div>
               </div>
               <div className="col-xs-1"></div>
               </div>
-          </div>
+        </div>
         )
     }
 

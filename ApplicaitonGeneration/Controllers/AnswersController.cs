@@ -1,4 +1,5 @@
-﻿using ApplicationGeneration;
+﻿using ApplicaitonGeneration;
+using ApplicationGeneration;
 using ApplicationGeneration.DAL;
 using ApplicationGeneration.Models;
 using Microsoft.AspNet.Identity;
@@ -6,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+
+
 
 namespace ApplicationGeneration.Controllers
 {

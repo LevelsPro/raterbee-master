@@ -48,13 +48,23 @@ var SurveyForm = React.createClass({
         var xhr = new XMLHttpRequest();
         xhr.open('post', '/survey/new', true);
         xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log(xhr);
+                    var results = JSON.parse(xhr.responseText);
+                    window.location = results["RedirectTo"];
+                } else {
+                    window.location = "/Survey/Thanks";
+                }
+            }
+        }.bind(this);
         xhr.send(JSON.stringify(data));
         //var xhr = new XMLHttpRequest();
         //xhr.open('get', this.props.submitUrl + "?" + parameters, true);
         //xhr.send();
         //window.location = this.props.submitUrl + "?" + parameters;
 
-        window.location = "/survey/thanks";
     },
     render () {
         var count = 1;
@@ -83,10 +93,10 @@ var SurveyForm = React.createClass({
                              <h5 style={{fontWeight: '900' , textAlign:'center', margin: '0px 0px 0px 0px' , paddingTop: '16px' , paddingBottom:'8px'}}>
                                  Please rate each of the following
                              </h5>
-                            <SurveyStarRating question="Satisfaction" raitingid="1" onChange={this.handleChange} />
-                            <SurveyStarRating question="Staff" raitingid="2" onChange={this.handleChange} />
-                            <SurveyStarRating question="Found It!" raitingid="3" onChange={this.handleChange} />
-                            <SurveyStarRating question="Wait to pay" raitingid="4" onChange={this.handleChange} />
+                            <SurveyStarRating question="Satisfaction" raitingid="1" backgroundshadow='#888888' onChange={this.handleChange} />
+                            <SurveyStarRating question="Staff" raitingid="2" backgroundshadow='#888888' onChange={this.handleChange} />
+                            <SurveyStarRating question="Found It!" raitingid="3" backgroundshadow='#888888' onChange={this.handleChange} />
+                            <SurveyStarRating question="Wait to pay" raitingid="4" backgroundshadow='#888888' onChange={this.handleChange} />
                               <div className="row">
                                   <div className="col-xs-4"></div>
                                   <div className="col-xs-4">
