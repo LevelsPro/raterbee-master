@@ -62,7 +62,7 @@ namespace ApplicationGeneration.Controllers
             // Distribution Answers chart
             DateTime now = DateTime.Now;
             ViewBag.AnswerChart = new string[25,5];
-            for (int x=0;x<25; x++)
+            for (int x=1;x<25; x++)
             {
                 for (int z = 0; z < 5; z++)
                 {
@@ -95,6 +95,7 @@ namespace ApplicationGeneration.Controllers
                 var key = answerCount.Key1.ToString();
                 var k = 0;
                 Int32.TryParse(key, out k);
+                k++; // Get rid of 0 time
                 foreach (var rating in answerCount.Result)
                 {
                     var value = 0;
