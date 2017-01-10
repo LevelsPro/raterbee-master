@@ -8,30 +8,40 @@
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Found it!', 'Staff', 'Satisfaction'],
-          ['1/06', 1000, 400,222],
-          ['1/07', 1170, 460,343],
-          ['1/08', 660, 1120,500],
-          ['1/09', 1030, 540,302]
-        ]);
-
-        @*var resultArray = [];
+        var resultArray = [];
         var array = @Html.Raw(Json.Encode(@ViewBag.AnswerChart));
-        resultArray[0] = [array[0][0], array[0][0]];
-        for (var i = 1; i < array.length; i++)
+        resultArray[0] = [array[0], array[1], array[2], array[3], array[4]];
+        for (var i = 1; i < 25; i++)
         {
-            resultArray[i] = [array[i][0], parseInt(array[i][1])];
-        }*@
+            // Handle linear array for the moment returned from controller
+            resultArray[i] = [(i-1).toString(), parseFloat(array[i*5]), parseFloat(array[i*5 + 1]), parseFloat(array[i*5 + 2]), parseFloat(array[i*5 +3])];
+        }
+        var data = google.visualization.arrayToDataTable(resultArray);
+        //var data = google.visualization.arrayToDataTable([
+        //          ['Year', 'Found it!', 'Staff', 'Satisfaction'],
+        //          ['1/06', 1000, 400,222],
+        //          ['1/07', 1170, 460,343],
+        //          ['1/08', 660, 1120,500],
+        //          ['1/09', 1030, 540,302]
+        //]);
 
         var options = {
             title: 'Average Ratering per Question',
-            hAxis: { title: 'Last 24 Hours', titleTextStyle: { color: '#333' } },
+            hAxis: { title: 'Hours', titleTextStyle: { color: '#333' } },
             vAxis: { minValue: 0 }
         };
 
         var chart = new google.visualization.AreaChart(document.getElementById('piechart'));
         chart.draw(data, options);
+
+        @*
+
+        var options = {
+            hAxis: { title: 'Last 24 Hours', titleTextStyle: { color: '#333' } },
+            vAxis: { minValue: 0 }
+        };
+        var chart = new google.visualization.AreaChart(document.getElementById('piechart'));
+        chart.draw(data, options);*@
     }
 
     @*google.charts.load('current', { 'packages': ['corechart'] });
@@ -77,8 +87,8 @@
         <div id="piechart" style="height: 400px;"></div>
     </div>
     @*<div class="col-xs-6">
-        <div id="piechart2" style="height: 400px;"></div>
-    </div>*@
+            <div id="piechart2" style="height: 400px;"></div>
+        </div>*@
 </div>
 <br />
 <br />
