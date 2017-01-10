@@ -92,7 +92,7 @@ namespace ApplicationGeneration.Controllers
                         CompanyId = model.CompanyId,
                         BeaconId = model.BeaconId,
                         QuestionId = ans.Question,
-                        SurveyAnswer = ans.Answer.ToString(),
+                        SurveyAnswer = ans.Answer,
                         DateSubmitted = timenow
                     });
                 }

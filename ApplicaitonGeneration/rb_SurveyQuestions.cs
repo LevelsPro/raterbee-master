@@ -22,6 +22,7 @@ namespace ApplicaitonGeneration
     
         public int Id { get; set; }
         public string Question { get; set; }
+        public Nullable<bool> FreeFormComment { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rb_SurveyAnswers> rb_SurveyAnswers { get; set; }

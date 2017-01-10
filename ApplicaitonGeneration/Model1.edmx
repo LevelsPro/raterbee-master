@@ -99,6 +99,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Question" Type="nvarchar" MaxLength="100" />
+          <Property Name="FreeFormComment" Type="bit" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -391,6 +392,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Question" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="rb_SurveyAnswers" Relationship="raterbeeModel.FK_SurveyAnswers_SurveyQuestions" FromRole="rb_SurveyQuestions" ToRole="rb_SurveyAnswers" />
+          <Property Name="FreeFormComment" Type="Boolean" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="raterbeeModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -566,6 +568,7 @@
           <EntitySetMapping Name="rb_SurveyQuestions">
             <EntityTypeMapping TypeName="raterbeeModel.rb_SurveyQuestions">
               <MappingFragment StoreEntitySet="rb_SurveyQuestions">
+                <ScalarProperty Name="FreeFormComment" ColumnName="FreeFormComment" />
                 <ScalarProperty Name="Question" ColumnName="Question" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

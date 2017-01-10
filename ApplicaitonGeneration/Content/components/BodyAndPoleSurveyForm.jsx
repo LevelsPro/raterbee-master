@@ -13,7 +13,7 @@ const column = {
 
 var SurveyForm = React.createClass({
     handleChange: function (fieldId, value) {
-        console.log(fieldId + " = " + value);
+
         var questionnumber = fieldId.split('-')[0];
         var starnumber = fieldId.split('-')[1];
 
@@ -22,10 +22,14 @@ var SurveyForm = React.createClass({
         newState["question-" + questionnumber] = value;
         this.setState(newState);
     },
+    handleTextAreaChange: function (event) {
+        var newState = {};
+        newState["question-" + event.target.id] = event.target.value;
+        this.setState(newState);
+    },
     handleSubmit: function (e) {
 
         e.preventDefault();
-        console.log(this.state);
         var surveyobject = [];
         for (var x = 1 ; x < 6; x++) {
             var question = "question-" + x;
@@ -51,7 +55,6 @@ var SurveyForm = React.createClass({
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    console.log(xhr);
                     var results = JSON.parse(xhr.responseText);
                     window.location = results["RedirectTo"];
                 } else {
@@ -60,10 +63,6 @@ var SurveyForm = React.createClass({
             }
         }.bind(this);
         xhr.send(JSON.stringify(data));
-        //var xhr = new XMLHttpRequest();
-        //xhr.open('get', this.props.submitUrl + "?" + parameters, true);
-        //xhr.send();
-        //window.location = this.props.submitUrl + "?" + parameters;
     },
     render () {
         var count = 1;
@@ -76,20 +75,20 @@ var SurveyForm = React.createClass({
         //</h3>
         return (
         <div>
-            <div className="row" style={{padding:'0px 0px 0px 0px', margin:'0px 0px 0px 0px' }}>
-                <div className="col-xs-12" style={{ left: '5px', padding:'0px 0px 0px 0px', margin:'0px 0px 0px 0px' }}>
+            <div className="row" style={{padding: '0px 0px 0px 0px', margin: '0px auto', maxWidth: '325px'}}>
+                <div className="col-xs-12" style={{padding: '0px 0px 0px 0px'}}>
                     <img style={{paddingBottom: '3px' }} src={'/Content/bodyandpole.png'} alt="boohoo" className="img-responsive" />
                 </div>
             </div>
             <div className="row" style={{ borderStyle: 'solid', border: 'thick solid #EC2E91' }}></div>
-            <div className="row" style={{ paddingTop: '0px' , marginTop: '0px' }}>
+            <div className="row" style={{ paddingTop: '0px' , marginTop: '10px' }}>
                 <div className="col-xs-12" style={{paddingRight: '0px' , paddingLeft: '0px' }}>
                     <h5 style={{fontWeight: '900' , textAlign:'center', margin: '0px 0px 0px 0px' , paddingTop: '16px' , paddingBottom:'8px'}}>
                         Please rate each of the following
                     </h5>
                 </div>
             </div>
-            <div className="row">
+            <div className="row" style={{ marginTop: '20px' }}>
               <div className="col-xs-1"></div>
               <div className="col-xs-10">
                   <div>
@@ -97,10 +96,22 @@ var SurveyForm = React.createClass({
                             <SurveyStarRating question="Satisfaction" raitingid="1" backgroundshadow='white' onChange={this.handleChange} />
                             <SurveyStarRating question="Staff" raitingid="2" backgroundshadow='white' onChange={this.handleChange} />
                             <SurveyStarRating question="Found It!" raitingid="3" backgroundshadow='white' onChange={this.handleChange} />
-                            <SurveyStarRating question="Wait to pay" raitingid="4" backgroundshadow='white' onChange={this.handleChange} />
+                               <div className="row" style={{
+                                                    borderRadius: '10px' ,
+                                                    paddingTop: '10px' ,
+                                                    paddingBottom: '10px' ,
+                                                    margin: '0px auto' ,
+                                                    maxWidth: '325px' ,
+                                                    border: '1px solid black' ,
+                                                    background: 'white'
+                                                    }}>
+                                    <div className="col-xs-12" style={{paddingTop:'30px'}}>
+                                        <textarea name="TextComment" id="5" className="input-borderbottom" onChange={this.handleTextAreaChange} style={{ width: '100%' }} placeholder="Additional Comments" />
+                                    </div>
+                               </div>
                               <div className="row">
                                   <div className="col-xs-4"></div>
-                                  <div className="col-xs-4">
+                                  <div className="col-xs-4" style={{textAlign:'center'}}>
                                     <button type="submit" style={{
                                             boxShadow: '3px 3px 5px #888888', height: '40px',
                                             fontWeight: '900',
@@ -108,13 +119,13 @@ var SurveyForm = React.createClass({
                                             backgroundColor: 'EC2E91',
                                             color:'white',
                                             textAlign: 'center',
-                                            marginTop: '30px'
+                                            marginTop: '30px',
                                         }} className="btn btn-submit">
                                         Submit
                                     </button>
                                   </div>
                               </div>
-                      </form>
+</form>
                   </div>
               </div>
               <div className="col-xs-1"></div>

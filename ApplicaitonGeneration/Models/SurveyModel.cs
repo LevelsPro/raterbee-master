@@ -15,7 +15,7 @@ namespace ApplicationGeneration.Models
     public class Survey
     {
         public int Question { get; set; }
-        public int Answer { get; set; }
+        public string Answer { get; set; }
     }
 
 

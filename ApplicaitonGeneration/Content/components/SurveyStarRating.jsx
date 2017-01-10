@@ -25,7 +25,8 @@ var SurveyStarRating = React.createClass({
                 borderRadius: '10px',
                 paddingTop: '10px',
                 paddingBottom: '10px',
-                marginTop: '10px',
+                margin: '0px auto',
+                maxWidth: '325px',
                 border: '1px solid black',
                 background: 'white'
             }}>

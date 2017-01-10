@@ -51,35 +51,42 @@ namespace ApplicationGeneration.Controllers
                     answer = answer.SurveyAnswer,
                     datesubmitted = answer.DateSubmitted == null ? DateTime.MinValue : answer.DateSubmitted.Value
                 });
+
             }
             _unitOfWork.Complete();
 
+            // Distribution Answers chart
             ViewBag.AnswerChart = new List<string[]>();
             ViewBag.AnswerChart.Add(new string[] { "Answer", "Count" });
-            var res = surveyAnswers  // Start with your table
-                        .GroupBy(r => r.SurveyAnswer) // Group by the key of your choice
-                        .Select(g => new { Rating = g.Key.Trim(), Count = g.Count() }) // Create an anonymous type w/results
-                        .ToList(); // Convert the results to List
-
+            var res = surveyAnswers  
+                        .Where(sa=> sa.QuestionId != 5)             // Don't include free form comments
+                        .GroupBy(r => r.SurveyAnswer) 
+                        .Select(g => new { Rating = g.Key.Trim(), Count = g.Count() }) 
+                        .ToList();
             foreach (var answerCount in res)
             {
                 ViewBag.AnswerChart.Add(new string[] { answerCount.Rating, answerCount.Count.ToString() });
             }
 
+            // Distribution questions chart
             ViewBag.QuestionChart = new List<string[]>();
             ViewBag.QuestionChart.Add(new string[] { "Question", "Count" });
-            var res2 = surveyAnswers  // Start with your table
-                        .GroupBy(r => r.rb_SurveyQuestions.Id) // Group by the key of your choice
-                        .Select(g => new { QuestionId = g.Key, Count = g.Count() }) // Create an anonymous type w/results
-                        .ToList(); // Convert the results to List
-
+            var res2 = surveyAnswers  
+                        .GroupBy(r => r.rb_SurveyQuestions.Id) 
+                        .Select(g => new { QuestionId = g.Key, Count = g.Count() }) 
+                        .ToList();
             foreach (var answerCount in res2)
             {
-                ViewBag.QuestionChart.Add(new string[] { questions.First(q => q.Id == answerCount.QuestionId).Question.Trim(), answerCount.Count.ToString() });
+                ViewBag.QuestionChart.Add(new string[] {
+                    questions
+                        .First(q => q.Id == answerCount.QuestionId)
+                        .Question.Trim(),
+                    answerCount.Count.ToString()
+                });
             }
 
             answers.Reverse();
-            return View(answers);
+            return View(answers.Take(50));
         }
     }
 }

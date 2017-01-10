@@ -8,6 +8,35 @@
     google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Found it!', 'Staff', 'Satisfaction'],
+          ['1/06', 1000, 400,222],
+          ['1/07', 1170, 460,343],
+          ['1/08', 660, 1120,500],
+          ['1/09', 1030, 540,302]
+        ]);
+
+        @*var resultArray = [];
+        var array = @Html.Raw(Json.Encode(@ViewBag.AnswerChart));
+        resultArray[0] = [array[0][0], array[0][0]];
+        for (var i = 1; i < array.length; i++)
+        {
+            resultArray[i] = [array[i][0], parseInt(array[i][1])];
+        }*@
+
+        var options = {
+            title: 'Average Ratering per Question',
+            hAxis: { title: 'Last 24 Hours', titleTextStyle: { color: '#333' } },
+            vAxis: { minValue: 0 }
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
+
+    @*google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
         var resultArray = [];
         var array = @Html.Raw(Json.Encode(@ViewBag.AnswerChart));
         resultArray[0] = [array[0][0], array[0][0]];
@@ -41,16 +70,18 @@
         var chart = new google.visualization.PieChart(document.getElementById('piechart2'));
 
         chart.draw(data, options);
-    }
+    }*@
 </script>
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-xs-12">
         <div id="piechart" style="height: 400px;"></div>
     </div>
-    <div class="col-xs-6">
+    @*<div class="col-xs-6">
         <div id="piechart2" style="height: 400px;"></div>
-    </div>
+    </div>*@
 </div>
+<br />
+<br />
 <table class="table">
     <tr>
         <th>

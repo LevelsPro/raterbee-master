@@ -105,3 +105,15 @@ input[type="checkbox"].input-validation-error {
     border-bottom: 1px solid #979797;
     width: 20px;
 }
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
