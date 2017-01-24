@@ -20,6 +20,7 @@ namespace ApplicaitonGeneration
         public Nullable<int> CompanyId { get; set; }
         public string SurveyAnswer { get; set; }
         public Nullable<System.DateTime> DateSubmitted { get; set; }
+        public Nullable<System.Guid> Guid { get; set; }
     
         public virtual rb_Companies rb_Companies { get; set; }
         public virtual rb_SurveyBeacons rb_SurveyBeacons { get; set; }

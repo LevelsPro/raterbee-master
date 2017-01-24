@@ -18,7 +18,7 @@
 <body style="padding-top:10px">
     <div id="content">
         @Html.AntiForgeryToken()
-        @Html.React("Components.SurveyForm", new { CompanyId = Model.CompanyId, BeaconId = Model.BeaconId, Authenticated = false })
+        @Html.React("Components.SurveyForm", new { CompanyId = Model.CompanyId, BeaconId = Model.BeaconId, Guid = Model.Guid, Authenticated = false })
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

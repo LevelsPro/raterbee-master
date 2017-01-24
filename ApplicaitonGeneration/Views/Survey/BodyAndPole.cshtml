@@ -16,7 +16,7 @@
 <body style="padding-top:0px">
     <div id="content">
         @Html.AntiForgeryToken()
-        @Html.React("Components.BodyAndPoleSurveyForm", new { CompanyId = Model.CompanyId, BeaconId = Model.BeaconId, Authenticated = false })
+        @Html.React("Components.BodyAndPoleSurveyForm", new { CompanyId = Model.CompanyId, BeaconId = Model.BeaconId, Guid = Model.Guid, Authenticated = false })
     </div>
 
 

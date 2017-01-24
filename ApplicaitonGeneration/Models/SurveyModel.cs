@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,6 +10,7 @@ namespace ApplicationGeneration.Models
     {
         public int CompanyId { get; set; }
         public int BeaconId { get; set; }
+        public Guid Guid { get; set; }
         public List<Survey> SurveyList { get; set; }
     }
 

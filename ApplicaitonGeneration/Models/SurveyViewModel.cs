@@ -13,8 +13,8 @@ namespace ApplicationGeneration.Models
         public int beacon { get; set; }
         public string question { get; set; }
         public string answer { get; set; }
+        public string Guid { get; set; }
         public DateTime datesubmitted { get; set; }
-
 
     }
 

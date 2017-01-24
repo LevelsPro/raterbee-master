@@ -15,6 +15,8 @@ namespace ApplicationGeneration.Controllers
     [Authorize]
     public class AnswersController : Controller
     {
+        const int CommentQuestionNumber = 5;
+
         private IUnitOfWork _unitOfWork;
         public AnswersController()
         {
@@ -51,6 +53,7 @@ namespace ApplicationGeneration.Controllers
                     id = answer.Id,
                     company = answer.rb_Companies.CompanyName,
                     beacon = answer.BeaconId == null ? 0 : answer.BeaconId.Value,
+                    Guid = answer.Guid.HasValue ? answer.Guid.Value.ToString() : "",
                     question = question,
                     answer = answer.SurveyAnswer,
                     datesubmitted = answer.DateSubmitted == null ? DateTime.MinValue : answer.DateSubmitted.Value
@@ -76,7 +79,7 @@ namespace ApplicationGeneration.Controllers
                 ViewBag.AnswerChart[0, y++] = question.Question.Trim();
             }
             var res = surveyAnswers
-                        .Where(sa => sa.QuestionId != 5) //&& sa.DateSubmitted > now.AddHours(-24) && sa.DateSubmitted <= now)             // Don't include free form comments]
+                        .Where(sa => sa.QuestionId != CommentQuestionNumber) //&& sa.DateSubmitted > now.AddHours(-24) && sa.DateSubmitted <= now)             // Don't include free form comments]
                         .GroupBy(
                         r => new { Hour = (r.DateSubmitted.HasValue ? r.DateSubmitted.Value.Hour : 0), r.SurveyAnswer }, (key, group) => new
                         {
@@ -95,7 +98,7 @@ namespace ApplicationGeneration.Controllers
                 var key = answerCount.Key1.ToString();
                 var k = 0;
                 Int32.TryParse(key, out k);
-                k++; // Get rid of 0 time
+                k++;                                        // Get rid of 0 time
                 foreach (var rating in answerCount.Result)
                 {
                     var value = 0;

@@ -455,6 +455,7 @@
     <Content Include="Views\Survey\BodyAndPoleThanksYou.cshtml" />
     <Content Include="Views\Survey\ModellsThanksYou.cshtml" />
     <Content Include="Views\Survey\WinterWearThanksYou.cshtml" />
+    <Content Include="Views\Survey\BodyAndPoleFeedback.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

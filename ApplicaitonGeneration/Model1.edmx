@@ -84,6 +84,7 @@
           <Property Name="CompanyId" Type="int" />
           <Property Name="SurveyAnswer" Type="nvarchar" MaxLength="100" />
           <Property Name="DateSubmitted" Type="datetime" />
+          <Property Name="Guid" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="rb_SurveyBeacons">
           <Key>
@@ -92,6 +93,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CompanyId" Type="int" />
           <Property Name="RemoveThankYouPage" Type="bit" />
+          <Property Name="AddFeedbackPage" Type="bit" />
         </EntityType>
         <EntityType Name="rb_SurveyQuestions">
           <Key>
@@ -374,6 +376,7 @@
           <NavigationProperty Name="rb_Companies" Relationship="raterbeeModel.FK_SurveyAnswers_Companies" FromRole="rb_SurveyAnswers" ToRole="rb_Companies" />
           <NavigationProperty Name="rb_SurveyBeacons" Relationship="raterbeeModel.FK_SurveyAnswers_Beacons" FromRole="rb_SurveyAnswers" ToRole="rb_SurveyBeacons" />
           <NavigationProperty Name="rb_SurveyQuestions" Relationship="raterbeeModel.FK_SurveyAnswers_SurveyQuestions" FromRole="rb_SurveyAnswers" ToRole="rb_SurveyQuestions" />
+          <Property Name="Guid" Type="Guid" />
         </EntityType>
         <EntityType Name="rb_SurveyBeacons">
           <Key>
@@ -384,6 +387,7 @@
           <Property Name="RemoveThankYouPage" Type="Boolean" />
           <NavigationProperty Name="rb_Companies" Relationship="raterbeeModel.FK_SurveyBeacons_Companies" FromRole="rb_SurveyBeacons" ToRole="rb_Companies" />
           <NavigationProperty Name="rb_SurveyAnswers" Relationship="raterbeeModel.FK_SurveyAnswers_Beacons" FromRole="rb_SurveyBeacons" ToRole="rb_SurveyAnswers" />
+          <Property Name="AddFeedbackPage" Type="Boolean" />
         </EntityType>
         <EntityType Name="rb_SurveyQuestions">
           <Key>
@@ -547,6 +551,7 @@
           <EntitySetMapping Name="rb_SurveyAnswers">
             <EntityTypeMapping TypeName="raterbeeModel.rb_SurveyAnswers">
               <MappingFragment StoreEntitySet="rb_SurveyAnswers">
+                <ScalarProperty Name="Guid" ColumnName="Guid" />
                 <ScalarProperty Name="DateSubmitted" ColumnName="DateSubmitted" />
                 <ScalarProperty Name="SurveyAnswer" ColumnName="SurveyAnswer" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
@@ -559,6 +564,7 @@
           <EntitySetMapping Name="rb_SurveyBeacons">
             <EntityTypeMapping TypeName="raterbeeModel.rb_SurveyBeacons">
               <MappingFragment StoreEntitySet="rb_SurveyBeacons">
+                <ScalarProperty Name="AddFeedbackPage" ColumnName="AddFeedbackPage" />
                 <ScalarProperty Name="RemoveThankYouPage" ColumnName="RemoveThankYouPage" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

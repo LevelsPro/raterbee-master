@@ -23,6 +23,7 @@ namespace ApplicaitonGeneration
         public int Id { get; set; }
         public Nullable<int> CompanyId { get; set; }
         public Nullable<bool> RemoveThankYouPage { get; set; }
+        public Nullable<bool> AddFeedbackPage { get; set; }
     
         public virtual rb_Companies rb_Companies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

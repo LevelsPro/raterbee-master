@@ -42,6 +42,7 @@ var SurveyForm = React.createClass({
             model: {
                 CompanyId: this.props.CompanyId,
                 BeaconId: this.props.BeaconId,
+                Guid: this.props.Guid,
                 SurveyList: surveyobject
             }
         }

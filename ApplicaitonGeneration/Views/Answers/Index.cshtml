@@ -5,7 +5,7 @@
 }
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-    google.charts.load('current', { 'packages': ['corechart'] });
+    @*google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
         var resultArray = [];
@@ -17,13 +17,6 @@
             resultArray[i] = [(i-1).toString(), parseFloat(array[i*5]), parseFloat(array[i*5 + 1]), parseFloat(array[i*5 + 2]), parseFloat(array[i*5 +3])];
         }
         var data = google.visualization.arrayToDataTable(resultArray);
-        //var data = google.visualization.arrayToDataTable([
-        //          ['Year', 'Found it!', 'Staff', 'Satisfaction'],
-        //          ['1/06', 1000, 400,222],
-        //          ['1/07', 1170, 460,343],
-        //          ['1/08', 660, 1120,500],
-        //          ['1/09', 1030, 540,302]
-        //]);
 
         var options = {
             title: 'Average Ratering per Question',
@@ -34,15 +27,15 @@
         var chart = new google.visualization.AreaChart(document.getElementById('piechart'));
         chart.draw(data, options);
 
-        @*
+    }*@
+            @*
 
         var options = {
             hAxis: { title: 'Last 24 Hours', titleTextStyle: { color: '#333' } },
             vAxis: { minValue: 0 }
         };
-        var chart = new google.visualization.AreaChart(document.getElementById('piechart'));
-        chart.draw(data, options);*@
-    }
+    var chart = new google.visualization.AreaChart(document.getElementById('piechart'));
+    chart.draw(data, options);*@
 
     @*google.charts.load('current', { 'packages': ['corechart'] });
     google.charts.setOnLoadCallback(drawChart);
@@ -82,10 +75,10 @@
         chart.draw(data, options);
     }*@
 </script>
-<div class="row">
-    <div class="col-xs-12">
+<div class="row" style="padding-top:60px;">
+    @*<div class="col-xs-12">
         <div id="piechart" style="height: 400px;"></div>
-    </div>
+    </div>*@
     @*<div class="col-xs-6">
             <div id="piechart2" style="height: 400px;"></div>
         </div>*@
@@ -109,9 +102,9 @@
         <th>
             Date
         </th>
-        @*<th>
-
-            </th>*@
+        <th>
+            Unique ID
+         </th>
     </tr>
 
     @foreach (var item in Model)
@@ -131,6 +124,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.datesubmitted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guid)
             </td>
             @*<td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.id }) |

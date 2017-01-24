@@ -45,6 +45,7 @@ var SurveyForm = React.createClass({
             model: {
                 CompanyId: this.props.CompanyId,
                 BeaconId: this.props.BeaconId,
+                Guid: this.props.Guid,
                 SurveyList: surveyobject
             }
         }
@@ -66,13 +67,6 @@ var SurveyForm = React.createClass({
     },
     render () {
         var count = 1;
-        // <div className="col-xs-6" style={{padding:'0px 0px 0px 0px', margin:'5px 0px 0px 0px'}}>
-        //    <div style={{ height: '41px', backgroundColor: 'white', marginLeft:'5px', marginRight:'6px'}}></div>
-        //</div>
-        //<h3 style={{fontWeight: '900' , backgroundColor: 'FF5733' ,
-        //    textAlign:'center', margin: '0px 20px 0px 20px' , paddingTop: '10px' , paddingBottom:'10px'}}>
-        //    Shopping Experience
-        //</h3>
         return (
         <div>
             <div className="row" style={{padding: '0px 0px 0px 0px', margin: '0px auto', maxWidth: '325px'}}>
