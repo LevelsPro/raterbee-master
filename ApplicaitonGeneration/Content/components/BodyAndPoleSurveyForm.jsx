@@ -69,12 +69,9 @@ var SurveyForm = React.createClass({
         var count = 1;
         return (
         <div>
-            <div className="row" style={{padding: '0px 0px 0px 0px', margin: '0px auto', maxWidth: '325px'}}>
-                <div className="col-xs-12" style={{padding: '0px 0px 0px 0px'}}>
-                    <img style={{paddingBottom: '3px' }} src={'/Content/bodyandpole.png'} alt="boohoo" className="img-responsive" />
-                </div>
+            <div className="row">
+                <img style={{ paddingBottom: '3px',padding: '0px 0px 0px 0px',margin:'0px auto', height: '175px' }} src={'/Content/bodyandpolefulllogowhite.png'} alt="boohoo" className="img-responsive" />
             </div>
-            <div className="row" style={{ borderStyle: 'solid', border: 'thick solid #EC2E91' }}></div>
             <div className="row" style={{ paddingTop: '0px' , marginTop: '10px' }}>
                 <div className="col-xs-12" style={{paddingRight: '0px' , paddingLeft: '0px' }}>
                     <h5 style={{fontWeight: '900' , textAlign:'center', margin: '0px 0px 0px 0px' , paddingTop: '16px' , paddingBottom:'8px'}}>
