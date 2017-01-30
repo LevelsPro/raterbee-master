@@ -1,0 +1,76 @@
+﻿@model RaterBee.Models.SurveyModel
+@{
+    ViewBag.Title = "Thanks!";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+    </style>
+
+</head>
+
+<body style="padding-top:10px;">
+    <div class="container body-content" style="padding-top:0px;">
+        <div class="row">
+            <div class="col-xs-3 text-center"></div>
+            <div class="col-xs-6 text-center">
+                <img src="~/Content/bodyandpolefulllogowhite.png"
+                     alt="boohoo"
+                     class="img-responsive" 
+                     style="padding-bottom:3px; padding: 0px 0px 0px 0px;margin:0px auto;height: 175px;"/>
+            </div>
+            <div class="col-xs-3 text-center"></div>
+        </div>
+        <br />
+        <br />
+        @using (Html.BeginForm("FeedbackSubmit", "Survey", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Guid)
+            @Html.HiddenFor(model => model.BeaconId)
+            <div class="row" style="padding-bottom:30px;">
+                <div class="col-xs-3 text-center"></div>
+                <div class="col-xs-6 text-center">
+                    <textarea name="FeedbackString" class="input-borderbottom"
+                              style="max-width: 500px; margin: 0px auto;
+                                        width: 100%;"
+                              placeholder="Please give us more feedback on how we can improve"></textarea>
+
+                </div>
+                <div class="col-xs-3 text-center"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 text-center"></div>
+                <div class="col-xs-6 text-center">
+                    <button type="submit" style="box-shadow: 3px 3px 1px #888888; margin: 0px auto;
+                                            width:100%;
+                                            background-color:#EC2E91;
+                                            font-weight:800;
+                                            font-size:18px;
+                                            color:white;
+                                            max-width: 200px;"
+                            class="btn">
+                        Submit
+                    </button>
+                </div>
+                <div class="col-xs-3 text-center"></div>
+            </div>
+        }
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

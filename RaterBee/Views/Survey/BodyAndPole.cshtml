@@ -1,0 +1,36 @@
+﻿@model RaterBee.Models.SurveyModel
+@{
+    Layout = "";
+}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Body &Aacute; Pole</title>
+    <meta name="description" content="Learn. Create. Transform. Shift your perspective, and push your limits.">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body style="padding-top:0px">
+    <div id="content">
+        @Html.AntiForgeryToken()
+        @Html.React("Components.BodyAndPoleSurveyForm", new { CompanyId = Model.CompanyId, BeaconId = Model.BeaconId, Guid = Model.Guid, Authenticated = false })
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.0/react-dom.js"></script>
+
+    <script src="https://unpkg.com/react-input-autosize/dist/react-input-autosize.js"></script>
+    <script src="https://unpkg.com/react-select/dist/react-select.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/react-select/dist/react-select.css">
+
+    <script src="@Url.Content("~/build/client.bundle.js")"></script>
+    @Html.ReactInitJavaScript()
+
+</body>
+</html>
