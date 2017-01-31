@@ -34,5 +34,6 @@ namespace ApplicaitonGeneration
         public virtual DbSet<rb_SurveyAnswers> rb_SurveyAnswers { get; set; }
         public virtual DbSet<rb_SurveyBeacons> rb_SurveyBeacons { get; set; }
         public virtual DbSet<rb_SurveyQuestions> rb_SurveyQuestions { get; set; }
+        public virtual DbSet<rb_SurveyBeaconQuestions> rb_SurveyBeaconQuestions { get; set; }
     }
 }

@@ -321,6 +321,9 @@
     <Compile Include="rb_SurveyAnswers.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="rb_SurveyBeaconQuestions.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="rb_SurveyBeacons.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

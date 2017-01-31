@@ -21,6 +21,9 @@
         <AssociationConnector Association="raterbeeModel.FK_SurveyAnswers_Beacons" />
         <AssociationConnector Association="raterbeeModel.FK_SurveyAnswers_SurveyQuestions" />
         <AssociationConnector Association="raterbeeModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="raterbeeModel.rb_SurveyBeaconQuestions" Width="1.5" PointX="5.25" PointY="8.375" />
+        <AssociationConnector Association="raterbeeModel.FK_SurveyBeaconQuestions_Beacons" />
+        <AssociationConnector Association="raterbeeModel.FK_SurveyBeaconQuestions_Questions" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

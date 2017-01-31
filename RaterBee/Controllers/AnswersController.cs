@@ -62,62 +62,62 @@ namespace RaterBee.Controllers
             }
             _unitOfWork.Complete();
 
-            // Distribution Answers chart
-            DateTime now = DateTime.Now;
-            ViewBag.AnswerChart = new string[25,5];
-            for (int x=1;x<25; x++)
-            {
-                for (int z = 0; z < 5; z++)
-                {
-                    ViewBag.AnswerChart[x, z] = "0";
-                }
-            }
-            var y = 0;
-            ViewBag.AnswerChart[0, y++] = "Hours";
-            foreach (var question in questions)
-            {
-                ViewBag.AnswerChart[0, y++] = question.Question.Trim();
-            }
-            var res = surveyAnswers
-                        .Where(sa => sa.QuestionId != CommentQuestionNumber) //&& sa.DateSubmitted > now.AddHours(-24) && sa.DateSubmitted <= now)             // Don't include free form comments]
-                        .GroupBy(
-                        r => new { Hour = (r.DateSubmitted.HasValue ? r.DateSubmitted.Value.Hour : 0), r.SurveyAnswer }, (key, group) => new
-                        {
-                            Key1 = key.Hour,
-                            Key2 = key.SurveyAnswer,
-                            Result = group.ToList()
-                        })
-                        //(r => new { Hour = (r.DateSubmitted.HasValue ? r.DateSubmitted.Value.Hour : 0), Rating = r.SurveyAnswer }) 
-                        //.Select(g => new { GroupedRating = g.Key, Count = g.Count() }) 
-                        .ToList();
+            //// Distribution Answers chart
+            //DateTime now = DateTime.Now;
+            //ViewBag.AnswerChart = new string[25,5];
+            //for (int x=1;x<25; x++)
+            //{
+            //    for (int z = 0; z < 5; z++)
+            //    {
+            //        ViewBag.AnswerChart[x, z] = "0";
+            //    }
+            //}
+            //var y = 0;
+            //ViewBag.AnswerChart[0, y++] = "Hours";
+            //foreach (var question in questions)
+            //{
+            //    ViewBag.AnswerChart[0, y++] = question.Question.Trim();
+            //}
+            //var res = surveyAnswers
+            //            .Where(sa => sa.QuestionId != CommentQuestionNumber) //&& sa.DateSubmitted > now.AddHours(-24) && sa.DateSubmitted <= now)             // Don't include free form comments]
+            //            .GroupBy(
+            //            r => new { Hour = (r.DateSubmitted.HasValue ? r.DateSubmitted.Value.Hour : 0), r.SurveyAnswer }, (key, group) => new
+            //            {
+            //                Key1 = key.Hour,
+            //                Key2 = key.SurveyAnswer,
+            //                Result = group.ToList()
+            //            })
+            //            //(r => new { Hour = (r.DateSubmitted.HasValue ? r.DateSubmitted.Value.Hour : 0), Rating = r.SurveyAnswer }) 
+            //            //.Select(g => new { GroupedRating = g.Key, Count = g.Count() }) 
+            //            .ToList();
 
-            foreach (var answerCount in res)
-            {
-                var questionCount = new int[5];
-                var answerTotal = new double[5];
-                var key = answerCount.Key1.ToString();
-                var k = 0;
-                Int32.TryParse(key, out k);
-                k++;                                        // Get rid of 0 time
-                foreach (var rating in answerCount.Result)
-                {
-                    var value = 0;
-                    Int32.TryParse(rating.SurveyAnswer, out value);
-                    answerTotal[rating.QuestionId] += value;
-                    questionCount[rating.QuestionId]++;
-                }
+            //foreach (var answerCount in res)
+            //{
+            //    var questionCount = new int[5];
+            //    var answerTotal = new double[5];
+            //    var key = answerCount.Key1.ToString();
+            //    var k = 0;
+            //    Int32.TryParse(key, out k);
+            //    k++;                                        // Get rid of 0 time
+            //    foreach (var rating in answerCount.Result)
+            //    {
+            //        var value = 0;
+            //        Int32.TryParse(rating.SurveyAnswer, out value);
+            //        answerTotal[rating.QuestionId] += value;
+            //        questionCount[rating.QuestionId]++;
+            //    }
 
-                for (int x = 0; x < 5; x++)
-                {
-                    if (questionCount[x] > 0)
-                    {
-                        ViewBag.AnswerChart[k, x] = (answerTotal[x] / questionCount[x]).ToString();
-                    } else
-                    {
-                        ViewBag.AnswerChart[k, x] = "0";
-                    }
-                }
-            }
+            //    for (int x = 0; x < 5; x++)
+            //    {
+            //        if (questionCount[x] > 0)
+            //        {
+            //            ViewBag.AnswerChart[k, x] = (answerTotal[x] / questionCount[x]).ToString();
+            //        } else
+            //        {
+            //            ViewBag.AnswerChart[k, x] = "0";
+            //        }
+            //    }
+            //}
 
             answers.Reverse();
             return View(answers.Take(50));

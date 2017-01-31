@@ -18,6 +18,7 @@ namespace ApplicaitonGeneration
         public rb_SurveyQuestions()
         {
             this.rb_SurveyAnswers = new HashSet<rb_SurveyAnswers>();
+            this.rb_SurveyBeaconQuestions = new HashSet<rb_SurveyBeaconQuestions>();
         }
     
         public int Id { get; set; }
@@ -26,5 +27,7 @@ namespace ApplicaitonGeneration
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rb_SurveyAnswers> rb_SurveyAnswers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<rb_SurveyBeaconQuestions> rb_SurveyBeaconQuestions { get; set; }
     }
 }

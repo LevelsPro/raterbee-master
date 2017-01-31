@@ -86,6 +86,14 @@
           <Property Name="DateSubmitted" Type="datetime" />
           <Property Name="Guid" Type="uniqueidentifier" />
         </EntityType>
+        <EntityType Name="rb_SurveyBeaconQuestions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="BeaconId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="rb_SurveyBeacons">
           <Key>
             <PropertyRef Name="Id" />
@@ -195,6 +203,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SurveyBeaconQuestions_Beacons">
+          <End Role="rb_SurveyBeacons" Type="Self.rb_SurveyBeacons" Multiplicity="1" />
+          <End Role="rb_SurveyBeaconQuestions" Type="Self.rb_SurveyBeaconQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rb_SurveyBeacons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="rb_SurveyBeaconQuestions">
+              <PropertyRef Name="BeaconId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyBeaconQuestions_Questions">
+          <End Role="rb_SurveyQuestions" Type="Self.rb_SurveyQuestions" Multiplicity="1" />
+          <End Role="rb_SurveyBeaconQuestions" Type="Self.rb_SurveyBeaconQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rb_SurveyQuestions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="rb_SurveyBeaconQuestions">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyBeacons_Companies">
           <End Role="rb_Companies" Type="Self.rb_Companies" Multiplicity="0..1" />
           <End Role="rb_SurveyBeacons" Type="Self.rb_SurveyBeacons" Multiplicity="*" />
@@ -216,6 +248,7 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rb_Companies" EntityType="Self.rb_Companies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rb_SurveyAnswers" EntityType="Self.rb_SurveyAnswers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rb_SurveyBeaconQuestions" EntityType="Self.rb_SurveyBeaconQuestions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rb_SurveyBeacons" EntityType="Self.rb_SurveyBeacons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rb_SurveyQuestions" EntityType="Self.rb_SurveyQuestions" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
@@ -245,6 +278,14 @@
           <AssociationSet Name="FK_SurveyAnswers_SurveyQuestions" Association="Self.FK_SurveyAnswers_SurveyQuestions">
             <End Role="rb_SurveyQuestions" EntitySet="rb_SurveyQuestions" />
             <End Role="rb_SurveyAnswers" EntitySet="rb_SurveyAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyBeaconQuestions_Beacons" Association="Self.FK_SurveyBeaconQuestions_Beacons">
+            <End Role="rb_SurveyBeacons" EntitySet="rb_SurveyBeacons" />
+            <End Role="rb_SurveyBeaconQuestions" EntitySet="rb_SurveyBeaconQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyBeaconQuestions_Questions" Association="Self.FK_SurveyBeaconQuestions_Questions">
+            <End Role="rb_SurveyQuestions" EntitySet="rb_SurveyQuestions" />
+            <End Role="rb_SurveyBeaconQuestions" EntitySet="rb_SurveyBeaconQuestions" />
           </AssociationSet>
           <AssociationSet Name="FK_SurveyBeacons_Companies" Association="Self.FK_SurveyBeacons_Companies">
             <End Role="rb_Companies" EntitySet="rb_Companies" />
@@ -292,6 +333,15 @@
           <AssociationSet Name="AspNetUserRoles" Association="raterbeeModel.AspNetUserRoles">
             <End Role="AspNetRole" EntitySet="AspNetRoles" />
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="rb_SurveyBeaconQuestions" EntityType="raterbeeModel.rb_SurveyBeaconQuestions" />
+          <AssociationSet Name="FK_SurveyBeaconQuestions_Beacons" Association="raterbeeModel.FK_SurveyBeaconQuestions_Beacons">
+            <End Role="rb_SurveyBeacons" EntitySet="rb_SurveyBeacons" />
+            <End Role="rb_SurveyBeaconQuestions" EntitySet="rb_SurveyBeaconQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyBeaconQuestions_Questions" Association="raterbeeModel.FK_SurveyBeaconQuestions_Questions">
+            <End Role="rb_SurveyQuestions" EntitySet="rb_SurveyQuestions" />
+            <End Role="rb_SurveyBeaconQuestions" EntitySet="rb_SurveyBeaconQuestions" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -388,6 +438,7 @@
           <NavigationProperty Name="rb_Companies" Relationship="raterbeeModel.FK_SurveyBeacons_Companies" FromRole="rb_SurveyBeacons" ToRole="rb_Companies" />
           <NavigationProperty Name="rb_SurveyAnswers" Relationship="raterbeeModel.FK_SurveyAnswers_Beacons" FromRole="rb_SurveyBeacons" ToRole="rb_SurveyAnswers" />
           <Property Name="AddFeedbackPage" Type="Boolean" />
+          <NavigationProperty Name="rb_SurveyBeaconQuestions" Relationship="raterbeeModel.FK_SurveyBeaconQuestions_Beacons" FromRole="rb_SurveyBeacons" ToRole="rb_SurveyBeaconQuestions" />
         </EntityType>
         <EntityType Name="rb_SurveyQuestions">
           <Key>
@@ -397,6 +448,7 @@
           <Property Name="Question" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="rb_SurveyAnswers" Relationship="raterbeeModel.FK_SurveyAnswers_SurveyQuestions" FromRole="rb_SurveyQuestions" ToRole="rb_SurveyAnswers" />
           <Property Name="FreeFormComment" Type="Boolean" />
+          <NavigationProperty Name="rb_SurveyBeaconQuestions" Relationship="raterbeeModel.FK_SurveyBeaconQuestions_Questions" FromRole="rb_SurveyQuestions" ToRole="rb_SurveyBeaconQuestions" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="raterbeeModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -477,6 +529,40 @@
         <Association Name="AspNetUserRoles">
           <End Type="raterbeeModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
           <End Type="raterbeeModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityType Name="rb_SurveyBeaconQuestions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionId" Type="Int32" Nullable="false" />
+          <Property Name="BeaconId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="rb_SurveyBeacons" Relationship="raterbeeModel.FK_SurveyBeaconQuestions_Beacons" FromRole="rb_SurveyBeaconQuestions" ToRole="rb_SurveyBeacons" />
+          <NavigationProperty Name="rb_SurveyQuestions" Relationship="raterbeeModel.FK_SurveyBeaconQuestions_Questions" FromRole="rb_SurveyBeaconQuestions" ToRole="rb_SurveyQuestions" />
+        </EntityType>
+        <Association Name="FK_SurveyBeaconQuestions_Beacons">
+          <End Type="raterbeeModel.rb_SurveyBeacons" Role="rb_SurveyBeacons" Multiplicity="1" />
+          <End Type="raterbeeModel.rb_SurveyBeaconQuestions" Role="rb_SurveyBeaconQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rb_SurveyBeacons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="rb_SurveyBeaconQuestions">
+              <PropertyRef Name="BeaconId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyBeaconQuestions_Questions">
+          <End Type="raterbeeModel.rb_SurveyQuestions" Role="rb_SurveyQuestions" Multiplicity="1" />
+          <End Type="raterbeeModel.rb_SurveyBeaconQuestions" Role="rb_SurveyBeaconQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rb_SurveyQuestions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="rb_SurveyBeaconQuestions">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -588,6 +674,15 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="rb_SurveyBeaconQuestions">
+            <EntityTypeMapping TypeName="raterbeeModel.rb_SurveyBeaconQuestions">
+              <MappingFragment StoreEntitySet="rb_SurveyBeaconQuestions">
+                <ScalarProperty Name="BeaconId" ColumnName="BeaconId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
