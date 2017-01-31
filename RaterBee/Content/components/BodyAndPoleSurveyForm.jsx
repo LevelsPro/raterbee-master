@@ -31,7 +31,8 @@ var SurveyForm = React.createClass({
 
         e.preventDefault();
         var surveyobject = [];
-        for (var x = 1 ; x < 6; x++) {
+        // TODO - this loops needs to be dynamic and not hardcoded
+        for (var x = 1 ; x < 20; x++) {
             var question = "question-" + x;
             if (this.state[question] != null) {
                 surveyobject.push({
@@ -43,9 +44,9 @@ var SurveyForm = React.createClass({
 
         var data = {
             model: {
-                CompanyId: this.props.CompanyId,
-                BeaconId: this.props.BeaconId,
-                Guid: this.props.Guid,
+                CompanyId: this.props.Model.CompanyId,
+                BeaconId: this.props.Model.BeaconId,
+                Guid: this.props.Model.Guid,
                 SurveyList: surveyobject
             }
         }
@@ -84,18 +85,21 @@ var SurveyForm = React.createClass({
               <div className="col-xs-10">
                   <div>
                       <form method="POST" onSubmit={this.handleSubmit }>
-                            <SurveyStarRating question="Satisfaction" raitingid="1" backgroundshadow='white' onChange={this.handleChange} />
-                            <SurveyStarRating question="Staff" raitingid="2" backgroundshadow='white' onChange={this.handleChange} />
-                            <SurveyStarRating question="Found It!" raitingid="3" backgroundshadow='white' onChange={this.handleChange} />
+                        {this.props.Model.SurveyQuestions.map(function (question) {
+                          return (
+                            <SurveyStarRating question={question.Question} raitingid={question.Id} backgroundshadow='white' onChange={this.handleChange} />
+                          );
+                          },this)
+                        }
                                <div className="row" style={{
-                                                    borderRadius: '10px' ,
-                                                    paddingTop: '10px' ,
-                                                    paddingBottom: '10px' ,
-                                                    margin: '0px auto' ,
-                                                    maxWidth: '325px' ,
-                                                    border: '1px solid black' ,
-                                                    background: 'white'
-                                                    }}>
+                                       borderRadius: '10px' ,
+                                       paddingTop: '10px' ,
+                                       paddingBottom: '10px' ,
+                                       margin: '0px auto' ,
+                                       maxWidth: '325px' ,
+                                       border: '1px solid black' ,
+                                       background: 'white'
+                                   }}>
                                     <div className="col-xs-12" style={{paddingTop:'30px'}}>
                                         <textarea name="TextComment" id="5" className="input-borderbottom" onChange={this.handleTextAreaChange} style={{ width: '100%' }} placeholder="Additional Comments" />
                                     </div>

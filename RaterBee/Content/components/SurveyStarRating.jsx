@@ -39,26 +39,26 @@ var SurveyStarRating = React.createClass({
                                type="radio" id={this.props.raitingid + "-4"}
                                name={this.props.raitingid + "rating"}
                                value="4" />
-                        <label htmlFor={this.props.raitingid + "-4"} title="Pretty good">4 stars</label>
+                        <label htmlFor={this.props.raitingid + "-4"}>4 stars</label>
 
                         <input onChange={this.handleChange}
                                type="radio" id={this.props.raitingid + "-3"}
                                name={this.props.raitingid + "rating"}
                                value="3" />
-                        <label htmlFor={this.props.raitingid + "-3"} title="Meh">3 stars</label>
+                        <label htmlFor={this.props.raitingid + "-3"}>3 stars</label>
 
                         <input onChange={this.handleChange}
                                type="radio" id={this.props.raitingid + "-2"}
                                name={this.props.raitingid + "rating"}
                                value="2" />
-                        <label htmlFor={this.props.raitingid + "-2"} title="Kinda bad">2 stars</label>
+                        <label htmlFor={this.props.raitingid + "-2"}>2 stars</label>
 
                         <input onChange={this.handleChange}
                                type="radio"
                                id={this.props.raitingid + "-1"}
                                name={this.props.raitingid + "rating"}
                                value="1" />
-                        <label htmlFor={this.props.raitingid + "-1"} title="Sucks big time">1 star</label>
+                        <label htmlFor={this.props.raitingid + "-1"}>1 star</label>
                     </div>
                 </div>
             </div>

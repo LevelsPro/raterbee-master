@@ -4,6 +4,7 @@ using RaterBee.DAL;
 using RaterBee.Helpers;
 using RaterBee.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -24,17 +25,28 @@ namespace RaterBee.Controllers
         {
             var companyId = 0;
             var companyName = "";
+            var questions = new List<SurveyQuestion>();
+            IEnumerable<int> questionIds;
             var Guid = System.Guid.NewGuid();
             var beacon = _unitOfWork.Beacons.Find(b => b.Id == Id).FirstOrDefault();
             if (beacon != null)
             {
                 companyId = beacon.rb_Companies.Id;
                 companyName = beacon.rb_Companies.CompanyName.Trim();
+                questionIds = beacon.rb_SurveyBeaconQuestions.Select(sbq => sbq.QuestionId);
+                questions = _unitOfWork.SurveyQuestions.Find(q => questionIds.Contains(q.Id))
+                    .Select(que => new SurveyQuestion { Question = que.Question, Id = que.Id })
+                    .ToList();
             }
             if (companyId > 0)
             {
                 ViewBag.Message = companyName + " Survey";
-                return View(companyName, new SurveyModel() { CompanyId = companyId, BeaconId = Id, Guid = Guid });
+                return View(companyName, new SurveyModel() {
+                    CompanyId = companyId,
+                    BeaconId = Id,
+                    Guid = Guid,
+                    SurveyQuestions = questions
+                });
             }
             else
                 return View("Error");
