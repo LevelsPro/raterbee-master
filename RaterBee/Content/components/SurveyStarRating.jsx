@@ -26,14 +26,14 @@ var SurveyStarRating = React.createClass({
                 paddingTop: '10px',
                 paddingBottom: '10px',
                 margin: '0px auto',
-                maxWidth: '325px',
+                maxWidth: '450px',
                 border: '1px solid black',
                 background: 'white'
             }}>
-                <div className="col-xs-5" style={column}>
+                <div className="col-xs-7" style={column}>
                     <div style={titleText} className="">{this.props.question}</div>
                 </div>
-                <div className="col-xs-7">
+                <div className="col-xs-5">
                     <div className="rating">
                         <input onChange={this.handleChange}
                                type="radio" id={this.props.raitingid + "-4"}

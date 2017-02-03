@@ -96,12 +96,12 @@ var SurveyForm = React.createClass({
                                        paddingTop: '10px' ,
                                        paddingBottom: '10px' ,
                                        margin: '0px auto' ,
-                                       maxWidth: '325px' ,
+                                       maxWidth: '450px' ,
                                        border: '1px solid black' ,
                                        background: 'white'
                                    }}>
                                     <div className="col-xs-12" style={{paddingTop:'30px'}}>
-                                        <textarea name="TextComment" id="5" className="input-borderbottom" onChange={this.handleTextAreaChange} style={{ width: '100%' }} placeholder="Additional Comments" />
+                                        <textarea name="TextComment" id="5" rows="4" className="input-borderbottom" onChange={this.handleTextAreaChange} style={{ width: '100%' }} placeholder="Leave us additional comments and your name (optional)" />
                                     </div>
                                </div>
                               <div className="row">
