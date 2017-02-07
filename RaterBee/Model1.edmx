@@ -82,7 +82,7 @@
           <Property Name="QuestionId" Type="int" Nullable="false" />
           <Property Name="BeaconId" Type="int" />
           <Property Name="CompanyId" Type="int" />
-          <Property Name="SurveyAnswer" Type="nvarchar" MaxLength="100" />
+          <Property Name="SurveyAnswer" Type="nvarchar" MaxLength="4000" />
           <Property Name="DateSubmitted" Type="datetime" />
           <Property Name="Guid" Type="uniqueidentifier" />
         </EntityType>
@@ -421,7 +421,7 @@
           <Property Name="QuestionId" Type="Int32" Nullable="false" />
           <Property Name="BeaconId" Type="Int32" />
           <Property Name="CompanyId" Type="Int32" />
-          <Property Name="SurveyAnswer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SurveyAnswer" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="DateSubmitted" Type="DateTime" Precision="3" />
           <NavigationProperty Name="rb_Companies" Relationship="raterbeeModel.FK_SurveyAnswers_Companies" FromRole="rb_SurveyAnswers" ToRole="rb_Companies" />
           <NavigationProperty Name="rb_SurveyBeacons" Relationship="raterbeeModel.FK_SurveyAnswers_Beacons" FromRole="rb_SurveyAnswers" ToRole="rb_SurveyBeacons" />
