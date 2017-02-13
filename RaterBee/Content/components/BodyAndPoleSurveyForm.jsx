@@ -12,6 +12,11 @@ const column = {
 
 
 var SurveyForm = React.createClass({
+    getInitialState(){
+        return {
+            submitted: false
+        }
+    },
     handleChange: function (fieldId, value) {
 
         var questionnumber = fieldId.split('-')[0];
@@ -29,42 +34,47 @@ var SurveyForm = React.createClass({
     },
     handleSubmit: function (e) {
 
-        e.preventDefault();
-        var surveyobject = [];
-        // TODO - this loops needs to be dynamic and not hardcoded
-        for (var x = 1 ; x < 20; x++) {
-            var question = "question-" + x;
-            if (this.state[question] != null) {
-                surveyobject.push({
-                    "question": x,
-                    "answer": this.state[question]
-                })
-            }
-        }
-
-        var data = {
-            model: {
-                CompanyId: this.props.Model.CompanyId,
-                BeaconId: this.props.Model.BeaconId,
-                Guid: this.props.Model.Guid,
-                SurveyList: surveyobject
-            }
-        }
-
-        var xhr = new XMLHttpRequest();
-        xhr.open('post', '/survey/new', true);
-        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var results = JSON.parse(xhr.responseText);
-                    window.location = results["RedirectTo"];
-                } else {
-                    window.location = "/Survey/Thanks";
+        if (!this.state.submitted) {
+            this.setState({
+                submitted: true
+            });
+            e.preventDefault();
+            var surveyobject = [];
+            // TODO - this loops needs to be dynamic and not hardcoded
+            for (var x = 1 ; x < 20; x++) {
+                var question = "question-" + x;
+                if (this.state[question] != null) {
+                    surveyobject.push({
+                        "question": x,
+                        "answer": this.state[question]
+                    })
                 }
             }
-        }.bind(this);
-        xhr.send(JSON.stringify(data));
+
+            var data = {
+                model: {
+                    CompanyId: this.props.Model.CompanyId,
+                    BeaconId: this.props.Model.BeaconId,
+                    Guid: this.props.Model.Guid,
+                    SurveyList: surveyobject
+                }
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('post', '/survey/new', true);
+            xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var results = JSON.parse(xhr.responseText);
+                        window.location = results["RedirectTo"];
+                    } else {
+                        window.location = "/Survey/Thanks";
+                    }
+                }
+            }.bind(this);
+            xhr.send(JSON.stringify(data));
+        }
     },
     render () {
         var count = 1;
@@ -84,7 +94,6 @@ var SurveyForm = React.createClass({
               <div className="col-xs-1"></div>
               <div className="col-xs-10">
                   <div>
-                      <form method="POST" onSubmit={this.handleSubmit }>
                         {this.props.Model.SurveyQuestions.map(function (question) {
                           return (
                             <SurveyStarRating question={question.Question} raitingid={question.Id} backgroundshadow='white' onChange={this.handleChange} />
@@ -107,7 +116,7 @@ var SurveyForm = React.createClass({
                               <div className="row">
                                   <div className="col-xs-4"></div>
                                   <div className="col-xs-4" style={{textAlign:'center'}}>
-                                    <button type="submit" style={{
+                                    <button onClick={this.handleSubmit} type="submit" style={{
                                             boxShadow: '3px 3px 5px #888888', height: '40px',
                                             fontWeight: '900',
                                             width: '95px',
@@ -120,7 +129,6 @@ var SurveyForm = React.createClass({
                                     </button>
                                   </div>
                               </div>
-</form>
                   </div>
               </div>
               <div className="col-xs-1"></div>

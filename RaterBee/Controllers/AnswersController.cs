@@ -120,7 +120,7 @@ namespace RaterBee.Controllers
             //}
 
             answers.Reverse();
-            return View(answers.Take(50));
+            return View(answers.Take(200));
         }
     }
 }
